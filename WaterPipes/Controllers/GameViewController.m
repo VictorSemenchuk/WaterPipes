@@ -1,23 +1,24 @@
 //
-//  StartController.m
+//  GameViewController.m
 //  WaterPipes
 //
 //  Created by Victor Macintosh on 15/05/2018.
 //  Copyright © 2018 Victor Semenchuk. All rights reserved.
 //
 
-#import "StartController.h"
+#import "GameViewController.h"
 
-@interface StartController ()
+@interface GameViewController ()
 
 @end
 
-@implementation StartController
+@implementation GameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[self view] setBackgroundColor:[UIColor redColor]];
+    [[self view] setBackgroundColor:[UIColor greenColor]];
+    [self setTitle:@"Game"];
 }
 
 - (void)didReceiveMemoryWarning {

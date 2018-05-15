@@ -20,11 +20,18 @@
     
     CGRect frame = [[UIScreen mainScreen] bounds];
     UIWindow *window = [[UIWindow alloc] initWithFrame:frame];
+    [window setBackgroundColor:[UIColor greenColor]];
     
     StartController *startVC = [[StartController alloc] init];
-    [window setRootViewController:startVC];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:startVC];
+    [window setRootViewController:navVC];
+    
     [self setWindow:window];
-    [window makeKeyAndVisible];
+    [[self window] makeKeyAndVisible];
+    
+    [startVC release];
+    [navVC release];
+    [window release];
     
     return YES;
 }
@@ -56,5 +63,10 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)dealloc
+{
+    [_window release];
+    [super dealloc];
+}
 
 @end
