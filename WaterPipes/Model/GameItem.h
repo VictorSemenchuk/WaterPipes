@@ -31,6 +31,6 @@ typedef enum {
 //0 - exit doesn't exist at this position
 
 - (id)initPipeWithType:(PipeType)typeNumber andAngle:(NSInteger)angle;
-- (void)setupExitPositionsForAngle:(NSInteger)angle;
+- (void)setupExitPositionsForAngle:(NSInteger)angle forType:(PipeType)pipeType;
 
 @end

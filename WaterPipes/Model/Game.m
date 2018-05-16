@@ -13,6 +13,7 @@
 - (void)setupGameWithAreaSize:(NSUInteger)size;
 - (void)setupControlItemsForGame:(NSUInteger)number;
 - (int)getRandomNumberBetween:(int)from to:(int)to;
+- (void)resetGameItemsToUnsedState;
 
 @end
 
@@ -42,7 +43,7 @@
                 angle = 0;
             } else {
                 pipeType = [self getRandomNumberBetween:0 to:1];
-                angle = [angles[[self getRandomNumberBetween:0 to:1]] integerValue];
+                angle = [angles[[self getRandomNumberBetween:0 to:3]] integerValue];
             }
             GameItem *item = [[GameItem alloc] initPipeWithType:pipeType andAngle:angle];
             [currentRowItems setObject:item atIndexedSubscript:j];
@@ -58,85 +59,6 @@
     [items release];
 }
 
-- (BOOL)checkResult {
-    
-    for (int i = 1; i < [[self controlItems] count] - 1; i++) {
-        GameItem *item = [[self controlItems] objectAtIndex:i];
-        GameItem *prevItem = [[self controlItems] objectAtIndex:(i - 1)];
-        GameItem *nextItem = [[self controlItems] objectAtIndex:(i + 1)];
-        if ([item pipeType] == LinePipe) {
-            if ([[[item exitPositions] objectAtIndex:0] integerValue] == 1 &&
-                [[[item exitPositions] objectAtIndex:2] integerValue] == 1) {
-                if ((([[[prevItem exitPositions] objectAtIndex:0] integerValue] == 1)
-                     || ([[[prevItem exitPositions] objectAtIndex:2] integerValue] == 1)) &&
-                    (([[[nextItem exitPositions] objectAtIndex:0] integerValue] == 1)
-                     || ([[[nextItem exitPositions] objectAtIndex:2] integerValue] == 1))) {
-                        NSLog(@"OK");
-                    } else {
-                        return NO;
-                    }
-            } else if ([[[item exitPositions] objectAtIndex:1] integerValue] == 1 &&
-                       [[[item exitPositions] objectAtIndex:3] integerValue] == 1) {
-                if ((([[[prevItem exitPositions] objectAtIndex:1] integerValue] == 1)
-                     || ([[[prevItem exitPositions] objectAtIndex:3] integerValue] == 1)) &&
-                    (([[[nextItem exitPositions] objectAtIndex:1] integerValue] == 1)
-                     || ([[[nextItem exitPositions] objectAtIndex:3] integerValue] == 1))) {
-                        NSLog(@"OK");
-                    } else {
-                        return NO;
-                    }
-            } else {
-                return NO;
-            }
-        } else if ([item pipeType] == CurvedPipe) {
-            if ([[[item exitPositions] objectAtIndex:0] integerValue] == 1 &&
-                [[[item exitPositions] objectAtIndex:1] integerValue] == 1) {
-                if ((([[[prevItem exitPositions] objectAtIndex:2] integerValue] == 1)
-                     || ([[[prevItem exitPositions] objectAtIndex:3] integerValue] == 1)) &&
-                    (([[[nextItem exitPositions] objectAtIndex:2] integerValue] == 1)
-                     || ([[[nextItem exitPositions] objectAtIndex:3] integerValue] == 1))) {
-                        NSLog(@"OK");
-                    } else {
-                        return NO;
-                    }
-            } else if ([[[item exitPositions] objectAtIndex:1] integerValue] == 1 &&
-                       [[[item exitPositions] objectAtIndex:2] integerValue] == 1) {
-                if ((([[[prevItem exitPositions] objectAtIndex:0] integerValue] == 1)
-                     || ([[[prevItem exitPositions] objectAtIndex:3] integerValue] == 1)) &&
-                    (([[[nextItem exitPositions] objectAtIndex:0] integerValue] == 1)
-                     || ([[[nextItem exitPositions] objectAtIndex:3] integerValue] == 1))) {
-                        NSLog(@"OK");
-                    } else {
-                        return NO;
-                    }
-            } else if ([[[item exitPositions] objectAtIndex:2] integerValue] == 1 &&
-                       [[[item exitPositions] objectAtIndex:3] integerValue] == 1) {
-                if ((([[[prevItem exitPositions] objectAtIndex:0] integerValue] == 1)
-                     || ([[[prevItem exitPositions] objectAtIndex:1] integerValue] == 1)) &&
-                    (([[[nextItem exitPositions] objectAtIndex:0] integerValue] == 1)
-                     || ([[[nextItem exitPositions] objectAtIndex:1] integerValue] == 1))) {
-                        NSLog(@"OK");
-                    } else {
-                        return NO;
-                    }
-            } else if ([[[item exitPositions] objectAtIndex:0] integerValue] == 1 &&
-                       [[[item exitPositions] objectAtIndex:3] integerValue] == 1) {
-                if ((([[[prevItem exitPositions] objectAtIndex:1] integerValue] == 1)
-                     || ([[[prevItem exitPositions] objectAtIndex:2] integerValue] == 1)) &&
-                    (([[[nextItem exitPositions] objectAtIndex:1] integerValue] == 1)
-                     || ([[[nextItem exitPositions] objectAtIndex:2] integerValue] == 1))) {
-                        NSLog(@"OK");
-                    } else {
-                        return NO;
-                    }
-            }
-        } else {
-            return false;
-        }
-    }
-    return YES;
-}
-
 - (void)setupControlItemsForGame:(NSUInteger)number {
     NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:15];
     
@@ -146,54 +68,67 @@
         
         item = [[[self items] objectAtIndex:1] objectAtIndex:0];
         [item setPipeType:CurvedPipe];
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
         [items setObject:item atIndexedSubscript:1];
         
         item = [[[self items] objectAtIndex:1] objectAtIndex:1];
         [item setPipeType:CurvedPipe];
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
         [items setObject:item atIndexedSubscript:2];
         
         item = [[[self items] objectAtIndex:0] objectAtIndex:1];
         [item setPipeType:CurvedPipe];
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
         [items setObject:item atIndexedSubscript:3];
         
         item = [[[self items] objectAtIndex:0] objectAtIndex:2];
         [item setPipeType:LinePipe];
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
         [items setObject:item atIndexedSubscript:4];
         
         item = [[[self items] objectAtIndex:0] objectAtIndex:3];
         [item setPipeType:CurvedPipe];
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
         [items setObject:item atIndexedSubscript:5];
         
         item = [[[self items] objectAtIndex:1] objectAtIndex:3];
         [item setPipeType:LinePipe];
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
         [items setObject:item atIndexedSubscript:6];
         
         item = [[[self items] objectAtIndex:2] objectAtIndex:3];
         [item setPipeType:CurvedPipe];
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
         [items setObject:item atIndexedSubscript:7];
         
         item = [[[self items] objectAtIndex:2] objectAtIndex:2];
         [item setPipeType:CurvedPipe];
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
         [items setObject:item atIndexedSubscript:8];
         
         item = [[[self items] objectAtIndex:3] objectAtIndex:2];
         [item setPipeType:LinePipe];
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
         [items setObject:item atIndexedSubscript:9];
         
         item = [[[self items] objectAtIndex:4] objectAtIndex:2];
         [item setPipeType:CurvedPipe];
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
         [items setObject:item atIndexedSubscript:10];
         
         item = [[[self items] objectAtIndex:4] objectAtIndex:3];
         [item setPipeType:CurvedPipe];
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
         [items setObject:item atIndexedSubscript:11];
         
         item = [[[self items] objectAtIndex:3] objectAtIndex:3];
         [item setPipeType:CurvedPipe];
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
         [items setObject:item atIndexedSubscript:12];
         
         item = [[[self items] objectAtIndex:3] objectAtIndex:4];
         [item setPipeType:CurvedPipe];
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
         [items setObject:item atIndexedSubscript:13];
         
         item = [[[self items] objectAtIndex:4] objectAtIndex:4];
@@ -205,12 +140,51 @@
     [items release];
 }
 
+- (BOOL)checkResult {
+    
+    for (int i = 0; i < [[self controlItems] count] - 1; i++) {
+        GameItem *item = [[self controlItems] objectAtIndex:i];
+        GameItem *nextItem = [[self controlItems] objectAtIndex:(i + 1)];
+        if (([[[item exitPositions] objectAtIndex:2] integerValue] == 1) &&
+            ([[[nextItem exitPositions] objectAtIndex:0] integerValue] == 1)) {
+            NSLog(@"OK! Next item");
+            [[item exitPositions] setObject:[NSNumber numberWithInt:-1] atIndexedSubscript:2];
+            [[nextItem exitPositions] setObject:[NSNumber numberWithInt:-1] atIndexedSubscript:0];
+        } else if (([[[item exitPositions] objectAtIndex:0] integerValue] == 1) &&
+                   ([[[nextItem exitPositions] objectAtIndex:2] integerValue] == 1)) {
+            NSLog(@"OK! Next item");
+            [[item exitPositions] setObject:[NSNumber numberWithInt:-1] atIndexedSubscript:0];
+            [[nextItem exitPositions] setObject:[NSNumber numberWithInt:-1] atIndexedSubscript:2];
+        } else if (([[[item exitPositions] objectAtIndex:1] integerValue] == 1) &&
+                   ([[[nextItem exitPositions] objectAtIndex:3] integerValue] == 1)) {
+            NSLog(@"OK! Next item");
+            [[item exitPositions] setObject:[NSNumber numberWithInt:-1] atIndexedSubscript:1];
+            [[nextItem exitPositions] setObject:[NSNumber numberWithInt:-1] atIndexedSubscript:3];
+        } else if (([[[item exitPositions] objectAtIndex:3] integerValue] == 1) &&
+                   ([[[nextItem exitPositions] objectAtIndex:1] integerValue] == 1)) {
+            NSLog(@"OK! Next item");
+            [[item exitPositions] setObject:[NSNumber numberWithInt:-1] atIndexedSubscript:3];
+            [[nextItem exitPositions] setObject:[NSNumber numberWithInt:-1] atIndexedSubscript:1];
+        } else {
+            NSLog(@"The game continues");
+            [self resetGameItemsToUnsedState];
+            return NO;
+        }
+    }
+    return YES;
+}
+
+- (void)resetGameItemsToUnsedState {
+    for (GameItem *item in [self controlItems]) {
+        [item setupExitPositionsForAngle:[item angle] forType:[item pipeType]];
+    }
+}
+
 - (int)getRandomNumberBetween:(int)from to:(int)to {
     return (int)from + arc4random() % (to-from+1);
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [_controlItems release];
     [_items release];
     [super dealloc];

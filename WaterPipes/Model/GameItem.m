@@ -23,27 +23,43 @@
     self = [super init];
     if (self) {
         _pipeType = typeNumber;
-        [self setupExitPositionsForAngle:angle];
+        [self setupExitPositionsForAngle:angle forType:typeNumber];
     }
     return self;
 }
 
-- (void)setupExitPositionsForAngle:(NSInteger)angle {
+- (void)setupExitPositionsForAngle:(NSInteger)angle forType:(PipeType)pipeType {
     NSNumber *isExist = [[NSNumber alloc] initWithInt:(IsExist)];
     NSNumber *isNotExist = [[NSNumber alloc] initWithInt:(IsNotExist)];
     [self setAngle:angle];
-    switch (angle) {
+    switch ([self angle]) {
         case 0:
-            _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist, isExist, isNotExist, isNotExist, nil];
+            if (pipeType == CurvedPipe) {
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist, isExist, isNotExist, isNotExist, nil];
+            } else {
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist, isNotExist, isExist, isNotExist, nil];
+            }
             break;
         case 90:
-            _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist, isExist, isExist, isNotExist, nil];
+            if (pipeType == CurvedPipe) {
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist, isExist, isExist, isNotExist, nil];
+            } else {
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist, isExist, isNotExist, isExist, nil];
+            }
             break;
         case 180:
-            _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist, isExist, isExist, isNotExist, nil];
+            if (pipeType == CurvedPipe) {
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist, isNotExist, isExist, isExist, nil];
+            } else {
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist, isNotExist, isExist, isNotExist, nil];
+            }
             break;
         case 270:
-            _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist, isExist, isExist, isNotExist, nil];
+            if (pipeType == CurvedPipe) {
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist, isNotExist, isNotExist, isExist, nil];
+            } else {
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist, isExist, isNotExist, isExist, nil];
+            }
             break;
         default:
             _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist, isNotExist, isNotExist, isNotExist, nil];

@@ -73,7 +73,7 @@
     [rotationAnimation setFillMode:kCAFillModeForwards];
     [[self layer] addAnimation:rotationAnimation forKey:nil];
     
-    [[self modelItem] setupExitPositionsForAngle: [[self modelItem] angle]];
+    [[self modelItem] setupExitPositionsForAngle: [[self modelItem] angle] forType:[[self modelItem] pipeType]];
     [[self delegate] cellWasRotated];
 }
 
