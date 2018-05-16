@@ -15,6 +15,8 @@
 		EFA14F6E20AB724100CF0E76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFA14F6C20AB724100CF0E76 /* LaunchScreen.storyboard */; };
 		EFA14F7320AB72FB00CF0E76 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA14F7220AB72FB00CF0E76 /* GameViewController.m */; };
 		EFA14F7620AB730400CF0E76 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA14F7520AB730400CF0E76 /* ResultsViewController.m */; };
+		EFD3419720AC28290056AD61 /* LinePipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD3419620AC28290056AD61 /* LinePipeCell.m */; };
+		EFD3419A20AC32FE0056AD61 /* CurvedPipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD3419920AC32FE0056AD61 /* CurvedPipeCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,10 @@
 		EFA14F7220AB72FB00CF0E76 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		EFA14F7420AB730400CF0E76 /* ResultsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
 		EFA14F7520AB730400CF0E76 /* ResultsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
+		EFD3419520AC28290056AD61 /* LinePipeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinePipeCell.h; sourceTree = "<group>"; };
+		EFD3419620AC28290056AD61 /* LinePipeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinePipeCell.m; sourceTree = "<group>"; };
+		EFD3419820AC32FE0056AD61 /* CurvedPipeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurvedPipeCell.h; sourceTree = "<group>"; };
+		EFD3419920AC32FE0056AD61 /* CurvedPipeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurvedPipeCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,10 @@
 			children = (
 				EFA14F6520AB592E00CF0E76 /* Cell.h */,
 				EFA14F6620AB592E00CF0E76 /* Cell.m */,
+				EFD3419520AC28290056AD61 /* LinePipeCell.h */,
+				EFD3419620AC28290056AD61 /* LinePipeCell.m */,
+				EFD3419820AC32FE0056AD61 /* CurvedPipeCell.h */,
+				EFD3419920AC32FE0056AD61 /* CurvedPipeCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -177,6 +187,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFA14F7320AB72FB00CF0E76 /* GameViewController.m in Sources */,
+				EFD3419720AC28290056AD61 /* LinePipeCell.m in Sources */,
+				EFD3419A20AC32FE0056AD61 /* CurvedPipeCell.m in Sources */,
 				EFA14F6720AB592E00CF0E76 /* Cell.m in Sources */,
 				EFA14F6A20AB5AEC00CF0E76 /* StartController.m in Sources */,
 				EFA14F7620AB730400CF0E76 /* ResultsViewController.m in Sources */,
