@@ -11,4 +11,6 @@
 
 @interface LinePipeCell : Cell
 
+- (id)initWithFrame:(CGRect)frame andModelItem:(GameItem *)modelItem;
+
 @end

@@ -10,11 +10,14 @@
 #import "Cell.h"
 #import "LinePipeCell.h"
 #import "CurvedPipeCell.h"
+#import "Game.h"
 
-@interface GameViewController ()
+@interface GameViewController () <CellProtocol>
 
 @property (retain, nonatomic) UIView *gameAreaView;
 @property (copy, nonatomic) NSArray *cells;
+@property (retain, nonatomic) Game *game;
+@property (assign, nonatomic) NSUInteger areaSize;
 
 - (void)configureGameAreaForSize:(NSUInteger)size;
 - (void)configureCellsWithSize:(CGSize)size and:(NSUInteger)cellsAmountPerRow;
@@ -29,7 +32,9 @@
     [[self view] setBackgroundColor:[UIColor greenColor]];
     [self setTitle:@"Game"];
     
-    [self configureGameAreaForSize:5];
+    NSUInteger areaSize = 5;
+    _game = [[Game alloc] initForGame:0 withAreaSize:areaSize];
+    [self configureGameAreaForSize:areaSize];
 }
 
 - (void)configureGameAreaForSize:(NSUInteger)size {
@@ -50,16 +55,18 @@
 - (void)configureCellsWithSize:(CGSize)size and:(NSUInteger)cellsAmountPerRow {
     NSMutableArray *cells = [[NSMutableArray alloc] initWithCapacity:cellsAmountPerRow];
     
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < cellsAmountPerRow; i++) {
         NSMutableArray *currentRowCells = [[NSMutableArray alloc] initWithCapacity:cellsAmountPerRow];
-        for (int j = 0; j < 1; j++) {
+        for (int j = 0; j < cellsAmountPerRow; j++) {
+            GameItem *gameItem = [[[[self game] items] objectAtIndex:i] objectAtIndex:j];
             CGRect cellFrame = CGRectMake((size.width * j), (size.height * i), size.width, size.height);
             Cell *cell;
-            if (i == 0) {
-                cell = [[LinePipeCell alloc] initWithFrame:cellFrame];
+            if ([gameItem pipeType] == LinePipe) {
+                cell = [[LinePipeCell alloc] initWithFrame:cellFrame andModelItem:gameItem];
             } else {
-                cell = [[CurvedPipeCell alloc] initWithFrame:cellFrame];
+                cell = [[CurvedPipeCell alloc] initWithFrame:cellFrame andModelItem:gameItem];
             }
+            [cell setDelegate:self];
             [[self gameAreaView] addSubview:cell];
             [currentRowCells setObject:cell atIndexedSubscript:j];
             [cell release];
@@ -72,7 +79,13 @@
     [cells release];
 }
 
-
+- (void)cellWasRotated {
+    if ([[self game] checkResult]) {
+        NSLog(@"Win");
+    } else {
+        NSLog(@"Game process continues");
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -83,17 +96,8 @@
 {
     [_gameAreaView release];
     [_cells release];
+    [_game release];
     [super dealloc];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

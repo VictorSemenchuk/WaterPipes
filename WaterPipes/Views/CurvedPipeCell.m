@@ -10,6 +10,14 @@
 
 @implementation CurvedPipeCell
 
+- (id)initWithFrame:(CGRect)frame andModelItem:(GameItem *)modelItem {
+    self = [super initWithFrame:frame andModelItem:modelItem];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (void)drawRect:(CGRect)rect {
     
     CGFloat minX = [self frame].size.width / 4;

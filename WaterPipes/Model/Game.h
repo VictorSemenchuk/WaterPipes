@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GameItem.h"
 
 @interface Game : NSObject
+
+@property (retain, nonatomic) NSArray *items;
+@property (retain, nonatomic) NSArray *controlItems;
+
+- (id)initForGame:(NSUInteger)number withAreaSize:(NSUInteger)size;
+- (BOOL)checkResult;
 
 @end

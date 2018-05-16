@@ -7,25 +7,29 @@
 //
 
 #import "Cell.h"
+#import "GameItem.h"
 
 @interface Cell()
 
-@property (retain, nonatomic) NSNumber *currentAngle;
 @property (assign, nonatomic) CGColorRef bgColor;
 @property (assign, nonatomic) CGColorRef strokeColor;
+@property (weak, nonatomic) GameItem *modelItem;
 
 - (CGColorRef)bgColor;
 - (CGColorRef)strokeColor;
+
+- (void)rotateCell;
+- (void)rotateCellWithAnimation;
 
 @end
 
 @implementation Cell
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame andModelItem:(GameItem *)modelItem {
     self = [super initWithFrame:frame];
     if (self) {
         
-        _currentAngle = [[NSNumber alloc] initWithLong:0];
+        _modelItem = modelItem;
         _bgColor = [[[[UIColor alloc] initWithRed:220.0/255.0
                                            green:233.0/255.0
                                             blue:239.0/255.0
@@ -35,25 +39,31 @@
                                                 blue:67.0/255.0
                                                alpha:255.0/255.0] autorelease] CGColor];
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rotateCell)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rotateCellWithAnimation)];
         [self addGestureRecognizer:tap];
         [tap release];
         
         [self setUserInteractionEnabled:YES];
-        
         [self setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.0]];
+        [self rotateCell];
     }
     return self;
 }
 
 - (void)rotateCell {
+    CGFloat angle = [[self modelItem] angle] * M_PI / 180;
+    CGAffineTransform currentTransform = [[self layer] affineTransform];
+    [[self layer] setAffineTransform:CGAffineTransformRotate(currentTransform, angle)];
+}
+
+- (void)rotateCellWithAnimation {
     CGFloat stepAngle = 90 * M_PI / 180;
-    NSInteger currentAngle = [[self currentAngle] integerValue];
+    NSInteger currentAngle = [[self modelItem] angle];
     
     if (currentAngle == 270) {
-        [self setCurrentAngle:[NSNumber numberWithLong:0]];
+        [[self modelItem] setAngle: 0];
     } else {
-        [self setCurrentAngle:[NSNumber numberWithLong:currentAngle + 90]];
+        [[self modelItem] setAngle:currentAngle + 90];
     }
     
     CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
@@ -62,13 +72,15 @@
     [rotationAnimation setRemovedOnCompletion:NO];
     [rotationAnimation setFillMode:kCAFillModeForwards];
     [[self layer] addAnimation:rotationAnimation forKey:nil];
+    
+    [[self modelItem] setupExitPositionsForAngle: [[self modelItem] angle]];
+    [[self delegate] cellWasRotated];
 }
 
 - (void)dealloc
 {
     _bgColor = nil;
     _strokeColor = nil;
-    [_currentAngle release];
     [super dealloc];
 }
 

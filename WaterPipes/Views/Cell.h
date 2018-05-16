@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GameItem.h"
+
+@protocol CellProtocol <NSObject>
+
+- (void)cellWasRotated;
+
+@end
 
 @interface Cell : UIView
+
+@property (weak, nonatomic) id<CellProtocol> delegate;
+- (id)initWithFrame:(CGRect)frame andModelItem:(GameItem *)modelItem;
 
 @end

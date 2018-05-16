@@ -17,6 +17,8 @@
 		EFA14F7620AB730400CF0E76 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA14F7520AB730400CF0E76 /* ResultsViewController.m */; };
 		EFD3419720AC28290056AD61 /* LinePipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD3419620AC28290056AD61 /* LinePipeCell.m */; };
 		EFD3419A20AC32FE0056AD61 /* CurvedPipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD3419920AC32FE0056AD61 /* CurvedPipeCell.m */; };
+		EFD3419E20AC5BFC0056AD61 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD3419D20AC5BFC0056AD61 /* Game.m */; };
+		EFD341A120AC5D400056AD61 /* GameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD341A020AC5D400056AD61 /* GameItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,10 @@
 		EFD3419620AC28290056AD61 /* LinePipeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinePipeCell.m; sourceTree = "<group>"; };
 		EFD3419820AC32FE0056AD61 /* CurvedPipeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurvedPipeCell.h; sourceTree = "<group>"; };
 		EFD3419920AC32FE0056AD61 /* CurvedPipeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurvedPipeCell.m; sourceTree = "<group>"; };
+		EFD3419C20AC5BFC0056AD61 /* Game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		EFD3419D20AC5BFC0056AD61 /* Game.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		EFD3419F20AC5D400056AD61 /* GameItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameItem.h; sourceTree = "<group>"; };
+		EFD341A020AC5D400056AD61 /* GameItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +80,7 @@
 				EFA14F6F20AB726500CF0E76 /* Support Files */,
 				EFA14F6B20AB5BE200CF0E76 /* Controllers */,
 				EFA14F7020AB727F00CF0E76 /* Views */,
+				EFD3419B20AC5B660056AD61 /* Model */,
 				EFA14F4F20AB566A00CF0E76 /* AppDelegate.h */,
 				EFA14F5020AB566A00CF0E76 /* AppDelegate.m */,
 				EFA14F5D20AB566D00CF0E76 /* Info.plist */,
@@ -115,6 +122,17 @@
 				EFD3419920AC32FE0056AD61 /* CurvedPipeCell.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		EFD3419B20AC5B660056AD61 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EFD3419C20AC5BFC0056AD61 /* Game.h */,
+				EFD3419D20AC5BFC0056AD61 /* Game.m */,
+				EFD3419F20AC5D400056AD61 /* GameItem.h */,
+				EFD341A020AC5D400056AD61 /* GameItem.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,11 +204,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFD3419E20AC5BFC0056AD61 /* Game.m in Sources */,
 				EFA14F7320AB72FB00CF0E76 /* GameViewController.m in Sources */,
 				EFD3419720AC28290056AD61 /* LinePipeCell.m in Sources */,
 				EFD3419A20AC32FE0056AD61 /* CurvedPipeCell.m in Sources */,
 				EFA14F6720AB592E00CF0E76 /* Cell.m in Sources */,
 				EFA14F6A20AB5AEC00CF0E76 /* StartController.m in Sources */,
+				EFD341A120AC5D400056AD61 /* GameItem.m in Sources */,
 				EFA14F7620AB730400CF0E76 /* ResultsViewController.m in Sources */,
 				EFA14F5F20AB566D00CF0E76 /* main.m in Sources */,
 				EFA14F5120AB566A00CF0E76 /* AppDelegate.m in Sources */,
