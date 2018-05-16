@@ -20,6 +20,13 @@
     [[self view] setBackgroundColor:[UIColor greenColor]];
     [self setTitle:@"Game"];
 }
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
