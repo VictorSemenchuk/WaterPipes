@@ -66,6 +66,8 @@
 
 - (void)dealloc
 {
+    _bgColor = nil;
+    _strokeColor = nil;
     [_currentAngle release];
     [super dealloc];
 }
