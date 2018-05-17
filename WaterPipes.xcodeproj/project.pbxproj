@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF111F8220ADED910095185A /* MatrixIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = EF111F8120ADED910095185A /* MatrixIndex.m */; };
 		EFA14F5120AB566A00CF0E76 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA14F5020AB566A00CF0E76 /* AppDelegate.m */; };
 		EFA14F5920AB566D00CF0E76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA14F5820AB566D00CF0E76 /* Assets.xcassets */; };
 		EFA14F5F20AB566D00CF0E76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA14F5E20AB566D00CF0E76 /* main.m */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EF111F8020ADED910095185A /* MatrixIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatrixIndex.h; sourceTree = "<group>"; };
+		EF111F8120ADED910095185A /* MatrixIndex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatrixIndex.m; sourceTree = "<group>"; };
 		EFA14F4C20AB566A00CF0E76 /* WaterPipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterPipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA14F4F20AB566A00CF0E76 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EFA14F5020AB566A00CF0E76 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				EFD3419D20AC5BFC0056AD61 /* Game.m */,
 				EFD3419F20AC5D400056AD61 /* GameItem.h */,
 				EFD341A020AC5D400056AD61 /* GameItem.m */,
+				EF111F8020ADED910095185A /* MatrixIndex.h */,
+				EF111F8120ADED910095185A /* MatrixIndex.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 				EFD341A120AC5D400056AD61 /* GameItem.m in Sources */,
 				EFA14F7620AB730400CF0E76 /* ResultsViewController.m in Sources */,
 				EFA14F5F20AB566D00CF0E76 /* main.m in Sources */,
+				EF111F8220ADED910095185A /* MatrixIndex.m in Sources */,
 				EFA14F5120AB566A00CF0E76 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GameItem.h"
+#import "MatrixIndex.h"
 
 @interface Game : NSObject
 
