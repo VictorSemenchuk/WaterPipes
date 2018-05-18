@@ -49,6 +49,10 @@
     [[self layer] addSublayer:vLine];
     [[self layer] addSublayer:hLine];
     
+    [valveCircle release];
+    [vLine release];
+    [hLine release];
+    
 }
 
 - (void)rotate {

@@ -71,4 +71,11 @@
     completion();
 }
 
+- (void)dealloc
+{
+    [_wheelLayerName release];
+    [_valve release];
+    [super dealloc];
+}
+
 @end
