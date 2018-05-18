@@ -13,9 +13,10 @@
 @interface Game : NSObject
 
 @property (retain, nonatomic) NSArray *items;
-@property (retain, nonatomic) NSArray *controlItems;
+@property (retain, nonatomic) NSMutableArray *controlItems;
 
 - (id)initForGame:(NSUInteger)number withAreaSize:(NSUInteger)size;
 - (BOOL)checkResult;
++ (int)getRandomNumberBetween:(int)from to:(int)to;
 
 @end

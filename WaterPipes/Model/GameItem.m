@@ -47,43 +47,80 @@
         case 0:
             if (pipeType == CurvedPipe) {
                 //|| 1 || 1 || 0 || 0 ||
-                _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist, isExist, isNotExist, isNotExist, nil];
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist,
+                                  isExist,
+                                  isNotExist,
+                                  isNotExist,
+                                  nil];
             } else {
                 //|| 1 || 0 || 1 || 0 ||
-                _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist, isNotExist, isExist, isNotExist, nil];
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist,
+                                  isNotExist,
+                                  isExist,
+                                  isNotExist,
+                                  nil];
             }
             break;
         case 90:
             if (pipeType == CurvedPipe) {
                 //|| 0 || 1 || 1 || 0 ||
-                _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist, isExist, isExist, isNotExist, nil];
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist,
+                                  isExist,
+                                  isExist,
+                                  isNotExist,
+                                  nil];
             } else {
                 //|| 0 || 1 || 0 || 1 ||
-                _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist, isExist, isNotExist, isExist, nil];
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist,
+                                  isExist,
+                                  isNotExist,
+                                  isExist,
+                                  nil];
             }
             break;
         case 180:
             if (pipeType == CurvedPipe) {
                 //|| 0 || 0 || 1 || 1 ||
-                _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist, isNotExist, isExist, isExist, nil];
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist,
+                                  isNotExist,
+                                  isExist,
+                                  isExist,
+                                  nil];
             } else {
                 //|| 1 || 0 || 1 || 0 ||
-                _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist, isNotExist, isExist, isNotExist, nil];
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist,
+                                  isNotExist,
+                                  isExist,
+                                  isNotExist,
+                                  nil];
             }
             break;
         case 270:
             if (pipeType == CurvedPipe) {
                 //|| 1 || 0 || 0 || 1 ||
-                _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist, isNotExist, isNotExist, isExist, nil];
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist,
+                                  isNotExist,
+                                  isNotExist,
+                                  isExist,
+                                  nil];
             } else {
                 //|| 0 || 1 || 0 || 1 ||
-                _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist, isExist, isNotExist, isExist, nil];
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist,
+                                  isExist,
+                                  isNotExist,
+                                  isExist,
+                                  nil];
             }
             break;
         default:
-            _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist, isNotExist, isNotExist, isNotExist, nil];
+            _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist,
+                              isNotExist,
+                              isNotExist,
+                              isNotExist,
+                              nil];
             break;
     }
+    
     [isExist release];
     [isNotExist release];
 }

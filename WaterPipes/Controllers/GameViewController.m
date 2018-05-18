@@ -21,7 +21,7 @@
 @property (assign, nonatomic) NSUInteger areaSize;
 
 - (void)configureGameAreaForSize:(NSUInteger)size;
-- (void)configureCellsWithSize:(CGSize)size and:(NSUInteger)cellsAmountPerRow;
+- (void)configureCellsWithAreaSize:(NSUInteger)cellsAmountPerRow;
 
 @end
 
@@ -33,11 +33,36 @@
     [[self view] setBackgroundColor:[UIColor greenColor]];
     [self setTitle:@"Game"];
     
-    NSUInteger areaSize = 5; //Cells amount in the row and column. So we will have game matrix 5x5
-    _game = [[Game alloc] initForGame:0 withAreaSize:areaSize];
+    _areaSize = 5; //Cells amount in the row and column. So we will have game matrix 5x5
     
     //Confiure matrix for cells
-    [self configureGameAreaForSize:areaSize];
+    [self configureGameAreaForSize:[self areaSize]];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Generate random number of available maps
+    int gameNumber = [Game getRandomNumberBetween:0 to:2];
+    
+    //Init game
+    _game = [[Game alloc] initForGame:gameNumber
+                         withAreaSize:[self areaSize]];
+    
+    //Confiure cells
+    [self configureCellsWithAreaSize:[self areaSize]];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+
+    //Remove current cell views from cuperview
+    //to generate new game when user will return again
+    for (NSArray *cellsRow in [self cells]) {
+        for (Cell *cell in cellsRow) {
+            [cell removeFromSuperview];
+        }
+    }
 }
 
 //MARK:- Configaration game area
@@ -49,34 +74,39 @@
                                       [[self view] center].y - gameAreaSideSize / 2,
                                       gameAreaSideSize,
                                       gameAreaSideSize); //Frame for game area matria
-    CGFloat cellSideSize = gameAreaSideSize / size; //Length for single cell side in game matrix
-    CGSize cellSize = CGSizeMake(cellSideSize, cellSideSize); //Size for single cell
     
     _gameAreaView = [[UIView alloc] initWithFrame:gameAreaFrame]; //Init view area where we will place cells
     [[self gameAreaView] setBackgroundColor:[UIColor purpleColor]];
     [[self view] addSubview:[self gameAreaView]];
-    
-    //Configure cells
-    [self configureCellsWithSize:cellSize and:size];
 }
 
-- (void)configureCellsWithSize:(CGSize)size and:(NSUInteger)cellsAmountPerRow {
+- (void)configureCellsWithAreaSize:(NSUInteger)cellsAmountPerRow {
+    
+    CGFloat gameAreaSideSize = [[self view] bounds].size.width; //Side size for game area
+    CGFloat cellSideSize = gameAreaSideSize / cellsAmountPerRow; //Length for single cell side in game matrix
+    CGSize cellSize = CGSizeMake(cellSideSize, cellSideSize); //Size for single cell
+    
     NSMutableArray *cells = [[NSMutableArray alloc] initWithCapacity:cellsAmountPerRow];
     
     for (int i = 0; i < cellsAmountPerRow; i++) {
         NSMutableArray *currentRowCells = [[NSMutableArray alloc] initWithCapacity:cellsAmountPerRow];
         for (int j = 0; j < cellsAmountPerRow; j++) {
-            GameItem *gameItem = [[[[self game] items] objectAtIndex:i] objectAtIndex:j];
+            GameItem *gameItem = [[self game] items][i][j];
             
             //Calculate origin coordinates and set frame for current cell
-            CGRect cellFrame = CGRectMake((size.width * j), (size.height * i), size.width, size.height);
+            CGRect cellFrame = CGRectMake((cellSize.width * j),
+                                          (cellSize.height * i),
+                                          cellSize.width,
+                                          cellSize.height);
             
             Cell *cell;
             //Creating cell particular pipe type cell objects
             if ([gameItem pipeType] == LinePipe) {
-                cell = [[LinePipeCell alloc] initWithFrame:cellFrame andModelItem:gameItem];
+                cell = [[LinePipeCell alloc] initWithFrame:cellFrame
+                                              andModelItem:gameItem];
             } else {
-                cell = [[CurvedPipeCell alloc] initWithFrame:cellFrame andModelItem:gameItem];
+                cell = [[CurvedPipeCell alloc] initWithFrame:cellFrame
+                                                andModelItem:gameItem];
             }
             [cell setDelegate:self];
             [[self gameAreaView] addSubview:cell];
@@ -96,20 +126,27 @@
 }
 
 //MARK:- CellProtocol mathods that fires when user touches at cell (and cell rotates)
+
 - (void)cellWasRotated {
     BOOL result = [[self game] checkResult]; //fires methods for check answer chain true way
     if (result) {
         NSLog(@"Win");
         //Show alert controller if user won
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Wow" message:@"You win" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK!" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Wow"
+                                                                       message:@"You win"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK!"
+                                                              style:UIAlertActionStyleCancel
+                                                            handler:^(UIAlertAction * _Nonnull action) {
             //Pushing result view controller for showing game results
             ResultsViewController *resultVC = [[ResultsViewController alloc] init];
             [[self navigationController] pushViewController:resultVC animated:YES];
             [resultVC release];
         }];
         [alert addAction:alertAction];
-        [self presentViewController:alert animated:YES completion:nil];
+        [self presentViewController:alert
+                           animated:YES
+                         completion:nil];
     } else {
         NSLog(@"Game process continues");
     }

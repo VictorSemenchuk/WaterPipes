@@ -12,7 +12,6 @@
 
 - (void)setupGameWithAreaSize:(NSUInteger)size;
 - (void)setupControlItemsForGame:(NSUInteger)number;
-- (int)getRandomNumberBetween:(int)from to:(int)to;
 - (void)resetGameItemsToUnsedState;
 - (void)setupPipePropertiesWithType:(PipeType)pipeType andI:(int)i andJ:(int)j;
 
@@ -60,8 +59,8 @@
                 pipeType = LinePipe;
                 angle = 0;
             } else {
-                pipeType = [self getRandomNumberBetween:0 to:1];
-                angle = [angles[[self getRandomNumberBetween:0 to:3]] integerValue];
+                pipeType = [Game getRandomNumberBetween:0 to:1];
+                angle = [angles[[Game getRandomNumberBetween:0 to:3]] integerValue];
             }
             GameItem *item = [[GameItem alloc] initPipeWithType:pipeType andAngle:angle];
             [currentRowItems setObject:item atIndexedSubscript:j];
@@ -83,102 +82,197 @@
     //For each variant design different goal chain
     //controlItems array contains indexes of goal cells for items array
     
-    NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:15];
-    
     if (number == 0) {
-        int i = 0, j = 0;
-        //Create MatrixIndex object for containing indexes
-        MatrixIndex *itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:0];
+        
+        int i = 0, j = 0, k = 0;
+        _controlItems = [[NSMutableArray alloc] initWithCapacity:15];
+        
+        [self addControlItemWithI:i andJ:j atK:k++];
         
         i = 1;
         j = 0;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:1];
-        //Generate exits vector for particular type of pipe
-        [self setupPipePropertiesWithType:CurvedPipe andI:i andJ:j];
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
         
         i = 1;
         j = 1;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:2];
-        [self setupPipePropertiesWithType:CurvedPipe andI:i andJ:j];
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
         
         i = 0;
         j = 1;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:3];
-        [self setupPipePropertiesWithType:CurvedPipe andI:i andJ:j];
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
         
         i = 0;
         j = 2;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:4];
-        [self setupPipePropertiesWithType:LinePipe andI:i andJ:j];
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:LinePipe];
         
         i = 0;
         j = 3;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:5];
-        [self setupPipePropertiesWithType:CurvedPipe andI:i andJ:j];
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
         
         i = 1;
         j = 3;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:6];
-        [self setupPipePropertiesWithType:LinePipe andI:i andJ:j];
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:LinePipe];
         
         i = 2;
         j = 3;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:7];
-        [self setupPipePropertiesWithType:CurvedPipe andI:i andJ:j];
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
         
         i = 2;
         j = 2;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:8];
-        [self setupPipePropertiesWithType:CurvedPipe andI:i andJ:j];
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
         
         i = 3;
         j = 2;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:9];
-        [self setupPipePropertiesWithType:LinePipe andI:i andJ:j];
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:LinePipe];
         
         i = 4;
         j = 2;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:10];
-        [self setupPipePropertiesWithType:CurvedPipe andI:i andJ:j];
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
         
         i = 4;
         j = 3;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:11];
-        [self setupPipePropertiesWithType:CurvedPipe andI:i andJ:j];
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
         
         i = 3;
         j = 3;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:12];
-        [self setupPipePropertiesWithType:CurvedPipe andI:i andJ:j];
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
         
         i = 3;
         j = 4;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:13];
-        [self setupPipePropertiesWithType:CurvedPipe andI:i andJ:j];
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
         
         i = 4;
         j = 4;
-        itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
-        [items setObject:itemIndex atIndexedSubscript:14];
+        [self addControlItemWithI:i andJ:j atK:k++];
+        
+    } else if (number == 1) {
+        
+        int i = 0, j = 0, k = 0;
+        _controlItems = [[NSMutableArray alloc] initWithCapacity:15];
+        
+        [self addControlItemWithI:i andJ:j atK:k++];
+        
+        i = 1;
+        j = 0;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 1;
+        j = 1;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 2;
+        j = 1;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:LinePipe];
+        
+        i = 3;
+        j = 1;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 3;
+        j = 0;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 4;
+        j = 0;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 4;
+        j = 1;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:LinePipe];
+        
+        i = 4;
+        j = 2;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:LinePipe];
+        
+        i = 4;
+        j = 3;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 3;
+        j = 3;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:LinePipe];
+        
+        i = 2;
+        j = 3;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 2;
+        j = 4;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 3;
+        j = 4;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:LinePipe];
+        
+        i = 4;
+        j = 4;
+        [self addControlItemWithI:i andJ:j atK:k++];
+        
+    } else if (number == 2) {
+        
+        int i = 0, j = 0, k = 0;
+        _controlItems = [[NSMutableArray alloc] initWithCapacity:15];
+        
+        [self addControlItemWithI:i andJ:j atK:k++];
+        
+        i = 1;
+        j = 0;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:LinePipe];
+        
+        i = 2;
+        j = 0;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:LinePipe];
+        
+        i = 3;
+        j = 0;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 3;
+        j = 1;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 4;
+        j = 1;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 4;
+        j = 2;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:LinePipe];
+        
+        i = 4;
+        j = 3;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 3;
+        j = 3;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 3;
+        j = 2;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 2;
+        j = 2;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 2;
+        j = 3;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:LinePipe];
+        
+        i = 2;
+        j = 4;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:CurvedPipe];
+        
+        i = 3;
+        j = 4;
+        [self addControlItemWithI:i andJ:j atK:k++ withPipeType:LinePipe];
+        
+        i = 4;
+        j = 4;
+        [self addControlItemWithI:i andJ:j atK:k++];
         
     }
     
-    _controlItems = [[NSArray alloc] initWithArray:items];
-    [items release];
 }
 
 //MARK:- Checking results
@@ -261,11 +355,23 @@
             return NO;
         }
     }
-    //If all OK then return TRUE value (i.e.
+    //If all OK then return TRUE value (i.e. user won current round)
     return YES;
 }
 
 //MARK:- Support methods
+
+- (void)addControlItemWithI:(int)i andJ:(int)j atK:(int)k withPipeType:(PipeType)pipeType {
+    [self addControlItemWithI:i andJ:j atK:k];
+    //Generate exits vector for particular type of pipe
+    [self setupPipePropertiesWithType:pipeType andI:i andJ:j];
+}
+
+- (void)addControlItemWithI:(int)i andJ:(int)j atK:(int)k {
+    //Create MatrixIndex object for containing indexes
+    MatrixIndex *itemIndex = [[[MatrixIndex alloc] initWithI:i andJ:j] autorelease];
+    [[self controlItems] setObject:itemIndex atIndexedSubscript:k];
+}
 
 - (void)setupPipePropertiesWithType:(PipeType)pipeType andI:(int)i andJ:(int)j {
     GameItem *currItem = [self items][i][j];
@@ -281,7 +387,7 @@
     }
 }
 
-- (int)getRandomNumberBetween:(int)from to:(int)to {
++ (int)getRandomNumberBetween:(int)from to:(int)to {
     return (int)from + arc4random() % (to-from+1);
 }
 
