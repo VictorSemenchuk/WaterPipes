@@ -10,6 +10,8 @@
 #import "Cell.h"
 #import "LinePipeCell.h"
 #import "CurvedPipeCell.h"
+#import "StartPipeCell.h"
+#import "EndPipeCell.h"
 #import "Game.h"
 #import "ResultsViewController.h"
 
@@ -19,6 +21,8 @@
 @property (copy, nonatomic) NSArray *cells;
 @property (retain, nonatomic) Game *game;
 @property (assign, nonatomic) NSUInteger areaSize;
+@property (assign, nonatomic) CGFloat gameAreaSideSize;
+@property (assign, nonatomic) CGFloat gameAreaPadding;
 
 - (void)configureGameAreaForSize:(NSUInteger)size;
 - (void)configureCellsWithAreaSize:(NSUInteger)cellsAmountPerRow;
@@ -30,10 +34,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[self view] setBackgroundColor:[UIColor greenColor]];
+    UIColor *rootViewBGColor = [UIColor colorWithRed:233.0/255.0
+                                               green:237.0/255.0
+                                                blue:242.0/255.0
+                                               alpha:255.0/255.0];
+    [[self view] setBackgroundColor:rootViewBGColor];
     [self setTitle:@"Game"];
     
     _areaSize = 5; //Cells amount in the row and column. So we will have game matrix 5x5
+    _gameAreaPadding = 0; //Padding of game area relative root view
+    _gameAreaSideSize = [[self view] bounds].size.width - [self gameAreaPadding] * 2; //Full side size of game area
     
     //Confiure matrix for cells
     [self configureGameAreaForSize:[self areaSize]];
@@ -63,27 +73,31 @@
             [cell removeFromSuperview];
         }
     }
+    
+    [[self gameAreaView] setUserInteractionEnabled:YES];
 }
 
 //MARK:- Configaration game area
 
 - (void)configureGameAreaForSize:(NSUInteger)size {
-
-    CGFloat gameAreaSideSize = [[self view] bounds].size.width; //Side size for game area
-    CGRect gameAreaFrame = CGRectMake(0,
-                                      [[self view] center].y - gameAreaSideSize / 2,
-                                      gameAreaSideSize,
-                                      gameAreaSideSize); //Frame for game area matria
+ 
+    CGRect gameAreaFrame = CGRectMake([self gameAreaPadding],
+                                      [[self view] center].y - [self gameAreaSideSize] / 2 + [self gameAreaPadding] + 20.0,
+                                      [self gameAreaSideSize],
+                                      [self gameAreaSideSize]); //Frame for game area matria
+    UIColor *gameAreaViewBGColor = [UIColor clearColor];
     
     _gameAreaView = [[UIView alloc] initWithFrame:gameAreaFrame]; //Init view area where we will place cells
-    [[self gameAreaView] setBackgroundColor:[UIColor purpleColor]];
+    [[self gameAreaView] setBackgroundColor:gameAreaViewBGColor];
+    [[[self gameAreaView] layer] setCornerRadius:0.0];
+    [[self gameAreaView] setClipsToBounds:YES];
+    
     [[self view] addSubview:[self gameAreaView]];
 }
 
 - (void)configureCellsWithAreaSize:(NSUInteger)cellsAmountPerRow {
     
-    CGFloat gameAreaSideSize = [[self view] bounds].size.width; //Side size for game area
-    CGFloat cellSideSize = gameAreaSideSize / cellsAmountPerRow; //Length for single cell side in game matrix
+    CGFloat cellSideSize = [self gameAreaSideSize] / cellsAmountPerRow; //Length for single cell side in game matrix
     CGSize cellSize = CGSizeMake(cellSideSize, cellSideSize); //Size for single cell
     
     NSMutableArray *cells = [[NSMutableArray alloc] initWithCapacity:cellsAmountPerRow];
@@ -101,7 +115,13 @@
             
             Cell *cell;
             //Creating cell particular pipe type cell objects
-            if ([gameItem pipeType] == LinePipe) {
+            if ([gameItem pipeType] == StartPipe) {
+                cell = [[StartPipeCell alloc] initWithFrame:cellFrame
+                                              andModelItem:gameItem];
+            } else if ([gameItem pipeType] == EndPipe) {
+                cell = [[EndPipeCell alloc] initWithFrame:cellFrame
+                                               andModelItem:gameItem];
+            } else if ([gameItem pipeType] == LinePipe) {
                 cell = [[LinePipeCell alloc] initWithFrame:cellFrame
                                               andModelItem:gameItem];
             } else {
@@ -131,22 +151,23 @@
     BOOL result = [[self game] checkResult]; //fires methods for check answer chain true way
     if (result) {
         NSLog(@"Win");
-        //Show alert controller if user won
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Wow"
-                                                                       message:@"You win"
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK!"
-                                                              style:UIAlertActionStyleCancel
-                                                            handler:^(UIAlertAction * _Nonnull action) {
-            //Pushing result view controller for showing game results
-            ResultsViewController *resultVC = [[ResultsViewController alloc] init];
-            [[self navigationController] pushViewController:resultVC animated:YES];
-            [resultVC release];
+        MatrixIndex *startIndex = [[self game] controlItems][0];
+        StartPipeCell *startPipeCell = [self cells][startIndex.i][startIndex.j];
+        UIColor *waterColor = [UIColor colorWithRed:85.0/255.0
+                                                   green:189.0/255.0
+                                                    blue:211.0/255.0
+                                                   alpha:255.0/255.0];
+        [[self gameAreaView] setUserInteractionEnabled:NO];
+        [startPipeCell rotateValveWithCompletion:^{
+            for (int k = 0; k < [[[self game] controlItems] count]; k++) {
+                MatrixIndex *currentItemIndex = [[self game] controlItems][k];
+                Cell *currentItem = [self cells][currentItemIndex.i][currentItemIndex.j];
+                [currentItem setBackgroundColor:waterColor];
+            }
+//            ResultsViewController *resultVC = [[ResultsViewController alloc] init];
+//            [[self navigationController] pushViewController:resultVC animated:YES];
+//            [resultVC release];
         }];
-        [alert addAction:alertAction];
-        [self presentViewController:alert
-                           animated:YES
-                         completion:nil];
     } else {
         NSLog(@"Game process continues");
     }

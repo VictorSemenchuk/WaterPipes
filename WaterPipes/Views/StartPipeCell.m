@@ -1,14 +1,32 @@
 //
-//  LinePipeCell.m
+//  StartPipeCell.m
 //  WaterPipes
 //
-//  Created by Victor Macintosh on 16/05/2018.
+//  Created by Victor Macintosh on 18/05/2018.
 //  Copyright © 2018 Victor Semenchuk. All rights reserved.
 //
 
-#import "LinePipeCell.h"
+#import "StartPipeCell.h"
+#import "ValveView.h"
 
-@implementation LinePipeCell
+@interface StartPipeCell()
+
+@property (retain, nonatomic) NSString *wheelLayerName;
+@property (retain, nonatomic) ValveView *valve;
+
+@end
+
+@implementation StartPipeCell
+
+- (id)initWithFrame:(CGRect)frame andModelItem:(GameItem *)modelItem {
+    self = [super initWithFrame:frame andModelItem:modelItem];
+    if (self) {
+        _wheelLayerName = @"WheelLayer";
+        _valve = [[ValveView alloc] initWithFrame:CGRectMake([self frame].size.width / 2 - 10, 5, 20, 20)];
+        [self addSubview:_valve];
+    }
+    return self;
+}
 
 - (void)drawRect:(CGRect)rect {
     
@@ -18,19 +36,15 @@
     CGFloat maxY = [self frame].size.height - 1;
     CGFloat xDelta = 5.0;
     CGFloat yDelta = 10.0;
-
+    
     UIBezierPath *path = [[UIBezierPath alloc] init];
     [path moveToPoint:CGPointMake(minX, minY)];
-    [path addLineToPoint:CGPointMake(minX, minY + yDelta)];
-    [path addLineToPoint:CGPointMake(minX + xDelta, minY + yDelta)];
     [path addLineToPoint:CGPointMake(minX + xDelta, maxY - yDelta)];
     [path addLineToPoint:CGPointMake(minX, maxY - yDelta)];
     [path addLineToPoint:CGPointMake(minX, maxY)];
     [path addLineToPoint:CGPointMake(maxX, maxY)];
     [path addLineToPoint:CGPointMake(maxX, maxY - yDelta)];
     [path addLineToPoint:CGPointMake(maxX - xDelta, maxY - yDelta)];
-    [path addLineToPoint:CGPointMake(maxX - xDelta, minY + yDelta)];
-    [path addLineToPoint:CGPointMake(maxX, minY + yDelta)];
     [path addLineToPoint:CGPointMake(maxX, minY)];
     [path closePath];
     
@@ -49,7 +63,12 @@
     [path release];
     [shapeLayer release];
     [border release];
+    
 }
 
+- (void)rotateValveWithCompletion:(void(^)(void))completion {
+    [[self valve] rotate];
+    completion();
+}
 
 @end

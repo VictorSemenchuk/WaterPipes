@@ -32,20 +32,21 @@
     if (self) {
         
         _modelItem = modelItem; //Set game item (from model)
-        
-        _bgColor = [[[[UIColor alloc] initWithRed:220.0/255.0
-                                           green:233.0/255.0
-                                            blue:239.0/255.0
-                                           alpha:255.0/255.0] autorelease] CGColor];
-        _strokeColor = [[[[UIColor alloc] initWithRed:50.0/255.0
-                                               green:54.0/255.0
-                                                blue:67.0/255.0
+        _bgColor = [[[[UIColor alloc] initWithRed:221.0/255.0
+                                            green:228.0/255.0
+                                             blue:247.0/255.0
+                                            alpha:255.0/255.0] autorelease] CGColor];
+        _strokeColor = [[[[UIColor alloc] initWithRed:155.0/255.0
+                                               green:173.0/255.0
+                                                blue:204.0/255.0
                                                alpha:255.0/255.0] autorelease] CGColor];
         
         //Gesture for cell tap
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rotateCellWithAnimation)];
-        [self addGestureRecognizer:tap];
-        [tap release];
+        if (([modelItem pipeType] == LinePipe) || ([modelItem pipeType] == CurvedPipe)) {
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rotateCellWithAnimation)];
+            [self addGestureRecognizer:tap];
+            [tap release];
+        }
         
         [self setUserInteractionEnabled:YES];
         [self setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.0]];

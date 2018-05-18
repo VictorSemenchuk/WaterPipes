@@ -55,8 +55,11 @@
             //Start pipe of chain is located at (0,0) and end pipe is located at (size - 1, size - 1) cells
             //So for these pipe set LinePipe type and angle = 0 degrees
             //Otherwise generate random angle and type for each pipe
-            if (((i == 0) && (j == 0)) || ((i == size - 1) && (j == size - 1))) {
-                pipeType = LinePipe;
+            if ((i == 0) && (j == 0))  {
+                pipeType = StartPipe;
+                angle = 0;
+            } else if ((i == size - 1) && (j == size - 1)) {
+                pipeType = EndPipe;
                 angle = 0;
             } else {
                 pipeType = [Game getRandomNumberBetween:0 to:1];

@@ -20,6 +20,9 @@
 		EFD3419A20AC32FE0056AD61 /* CurvedPipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD3419920AC32FE0056AD61 /* CurvedPipeCell.m */; };
 		EFD3419E20AC5BFC0056AD61 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD3419D20AC5BFC0056AD61 /* Game.m */; };
 		EFD341A120AC5D400056AD61 /* GameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD341A020AC5D400056AD61 /* GameItem.m */; };
+		EFFC34F120AF1FB700ABCADE /* StartPipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFC34F020AF1FB700ABCADE /* StartPipeCell.m */; };
+		EFFC34F420AF240C00ABCADE /* ValveView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFC34F320AF240C00ABCADE /* ValveView.m */; };
+		EFFC34F720AF352A00ABCADE /* EndPipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFC34F620AF352A00ABCADE /* EndPipeCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,12 @@
 		EFD3419D20AC5BFC0056AD61 /* Game.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		EFD3419F20AC5D400056AD61 /* GameItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameItem.h; sourceTree = "<group>"; };
 		EFD341A020AC5D400056AD61 /* GameItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameItem.m; sourceTree = "<group>"; };
+		EFFC34EF20AF1FB700ABCADE /* StartPipeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartPipeCell.h; sourceTree = "<group>"; };
+		EFFC34F020AF1FB700ABCADE /* StartPipeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartPipeCell.m; sourceTree = "<group>"; };
+		EFFC34F220AF240C00ABCADE /* ValveView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValveView.h; sourceTree = "<group>"; };
+		EFFC34F320AF240C00ABCADE /* ValveView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ValveView.m; sourceTree = "<group>"; };
+		EFFC34F520AF352A00ABCADE /* EndPipeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EndPipeCell.h; sourceTree = "<group>"; };
+		EFFC34F620AF352A00ABCADE /* EndPipeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EndPipeCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +132,12 @@
 				EFD3419620AC28290056AD61 /* LinePipeCell.m */,
 				EFD3419820AC32FE0056AD61 /* CurvedPipeCell.h */,
 				EFD3419920AC32FE0056AD61 /* CurvedPipeCell.m */,
+				EFFC34EF20AF1FB700ABCADE /* StartPipeCell.h */,
+				EFFC34F020AF1FB700ABCADE /* StartPipeCell.m */,
+				EFFC34F520AF352A00ABCADE /* EndPipeCell.h */,
+				EFFC34F620AF352A00ABCADE /* EndPipeCell.m */,
+				EFFC34F220AF240C00ABCADE /* ValveView.h */,
+				EFFC34F320AF240C00ABCADE /* ValveView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,12 +228,15 @@
 				EFA14F7320AB72FB00CF0E76 /* GameViewController.m in Sources */,
 				EFD3419720AC28290056AD61 /* LinePipeCell.m in Sources */,
 				EFD3419A20AC32FE0056AD61 /* CurvedPipeCell.m in Sources */,
+				EFFC34F420AF240C00ABCADE /* ValveView.m in Sources */,
 				EFA14F6720AB592E00CF0E76 /* Cell.m in Sources */,
 				EFA14F6A20AB5AEC00CF0E76 /* StartController.m in Sources */,
 				EFD341A120AC5D400056AD61 /* GameItem.m in Sources */,
 				EFA14F7620AB730400CF0E76 /* ResultsViewController.m in Sources */,
+				EFFC34F720AF352A00ABCADE /* EndPipeCell.m in Sources */,
 				EFA14F5F20AB566D00CF0E76 /* main.m in Sources */,
 				EF111F8220ADED910095185A /* MatrixIndex.m in Sources */,
+				EFFC34F120AF1FB700ABCADE /* StartPipeCell.m in Sources */,
 				EFA14F5120AB566A00CF0E76 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

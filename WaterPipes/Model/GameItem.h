@@ -10,7 +10,9 @@
 
 typedef enum {
     LinePipe = 0,
-    CurvedPipe
+    CurvedPipe,
+    StartPipe,
+    EndPipe
 } PipeType;
 
 typedef enum {

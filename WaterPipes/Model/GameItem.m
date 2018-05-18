@@ -52,6 +52,19 @@
                                   isNotExist,
                                   isNotExist,
                                   nil];
+            } else if (pipeType == StartPipe) {
+                //|| 0 || 0 || 1 || 0 ||
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isNotExist,
+                                  isNotExist,
+                                  isExist,
+                                  isNotExist,
+                                  nil];
+            } else if (pipeType == EndPipe) {
+                _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist,
+                                  isNotExist,
+                                  isNotExist,
+                                  isNotExist,
+                                  nil];
             } else {
                 //|| 1 || 0 || 1 || 0 ||
                 _exitPositions = [[NSMutableArray alloc] initWithObjects:isExist,
