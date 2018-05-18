@@ -23,9 +23,13 @@
 @property (assign, nonatomic) NSUInteger areaSize;
 @property (assign, nonatomic) CGFloat gameAreaSideSize;
 @property (assign, nonatomic) CGFloat gameAreaPadding;
+@property (retain, nonatomic) UILabel *stepCountLabel;
+@property (assign, nonatomic) NSUInteger stepCount;
+@property (retain, nonatomic) UIButton *showResultsButton;
 
 - (void)configureGameAreaForSize:(NSUInteger)size;
 - (void)configureCellsWithAreaSize:(NSUInteger)cellsAmountPerRow;
+- (void)setupControls;
 
 @end
 
@@ -44,9 +48,13 @@
     _areaSize = 5; //Cells amount in the row and column. So we will have game matrix 5x5
     _gameAreaPadding = 0; //Padding of game area relative root view
     _gameAreaSideSize = [[self view] bounds].size.width - [self gameAreaPadding] * 2; //Full side size of game area
+    _stepCount = 0;
     
     //Confiure matrix for cells
     [self configureGameAreaForSize:[self areaSize]];
+    
+    //Setup view contols
+    [self setupControls];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -75,6 +83,9 @@
     }
     
     [[self gameAreaView] setUserInteractionEnabled:YES];
+    [[self showResultsButton] setHidden:YES];
+    [self setStepCount:0];
+    [[self stepCountLabel] setText:[NSString stringWithFormat:@"Steps: %lu", [self stepCount]]];
 }
 
 //MARK:- Configaration game area
@@ -82,7 +93,7 @@
 - (void)configureGameAreaForSize:(NSUInteger)size {
  
     CGRect gameAreaFrame = CGRectMake([self gameAreaPadding],
-                                      [[self view] center].y - [self gameAreaSideSize] / 2 + [self gameAreaPadding] + 20.0,
+                                      [[self view] center].y - [self gameAreaSideSize] / 2 + [self gameAreaPadding],
                                       [self gameAreaSideSize],
                                       [self gameAreaSideSize]); //Frame for game area matria
     UIColor *gameAreaViewBGColor = [UIColor clearColor];
@@ -164,12 +175,12 @@
                 Cell *currentItem = [self cells][currentItemIndex.i][currentItemIndex.j];
                 [currentItem setBackgroundColor:waterColor];
             }
-//            ResultsViewController *resultVC = [[ResultsViewController alloc] init];
-//            [[self navigationController] pushViewController:resultVC animated:YES];
-//            [resultVC release];
+            [[self showResultsButton] setHidden:NO];
         }];
     } else {
         NSLog(@"Game process continues");
+        [self setStepCount:[self stepCount] + 1];
+        [[self stepCountLabel] setText:[NSString stringWithFormat:@"Steps: %lu", [self stepCount]]];
     }
 }
 
@@ -178,12 +189,64 @@
     // Dispose of any resources that can be recreated.
 }
 
+//MARK:- Setup controls
+
+- (void)setupControls {
+    UIColor *color = [UIColor colorWithRed:85.0/255.0
+                                         green:189.0/255.0
+                                          blue:211.0/255.0
+                                         alpha:255.0/255.0];
+    
+    //Counter label
+    
+    CGFloat labelHeight = 20;
+    CGRect labelFrame = CGRectMake(16, [[self gameAreaView] frame].origin.y - labelHeight - 20, [[self view] frame].size.width - 32, labelHeight);
+    
+    UILabel *counterLabel = [[UILabel alloc] initWithFrame:labelFrame];
+    [counterLabel setText:[NSString stringWithFormat:@"Steps: %lu", [self stepCount]]];
+    [counterLabel setFont:[UIFont fontWithName:@"Helvetica" size:20]];
+    [counterLabel setTextColor:color];
+    [self setStepCountLabel:counterLabel];
+    [[self view] addSubview:[self stepCountLabel]];
+    [counterLabel release];
+    
+    //Show results button
+    
+    CGRect buttonFrame = CGRectMake(0, 0, 150, 40);
+    CGFloat rootViewHeight = [[self view] frame].size.height;
+    CGFloat buttonCenterY = rootViewHeight - (rootViewHeight - ([[self gameAreaView] frame].origin.y + [[self gameAreaView] frame].size.height)) / 2;
+    
+    UIButton *resultsButton = [[UIButton alloc] initWithFrame:buttonFrame];
+    [resultsButton setCenter:CGPointMake([[self view] center].x, buttonCenterY)];
+    [resultsButton setTitle:@"Show results" forState:UIControlStateNormal];
+    [[resultsButton titleLabel] setFont:[UIFont fontWithName:@"Helvetica" size:15]];
+    [[resultsButton layer] setCornerRadius:3.0];
+    [resultsButton setBackgroundColor:color];
+    [self setShowResultsButton:resultsButton];
+    [[self view] addSubview:[self showResultsButton]];
+    [[self showResultsButton] setHidden:YES];
+    [[self showResultsButton] addTarget:self action:@selector(showResults) forControlEvents:UIControlEventTouchUpInside];
+    [resultsButton release];
+    
+}
+
+//MARK:- Selectors
+
+- (void)showResults {
+    ResultsViewController *resultVC = [[ResultsViewController alloc] init];
+    [[self navigationController] pushViewController:resultVC animated:YES];
+    [resultVC release];
+}
+
 //MARK:- Deallocating
+
 - (void)dealloc
 {
     [_gameAreaView release];
     [_cells release];
     [_game release];
+    [_stepCountLabel release];
+    [_showResultsButton release];
     [super dealloc];
 }
 
