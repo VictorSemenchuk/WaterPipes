@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4063B51C20B1C38A00BC2F83 /* LogoClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4063B51B20B1C38A00BC2F83 /* LogoClassView.m */; };
 		EFA14F5120AB566A00CF0E76 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA14F5020AB566A00CF0E76 /* AppDelegate.m */; };
 		EFA14F5920AB566D00CF0E76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA14F5820AB566D00CF0E76 /* Assets.xcassets */; };
 		EFA14F5F20AB566D00CF0E76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA14F5E20AB566D00CF0E76 /* main.m */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4063B51A20B1C38A00BC2F83 /* LogoClassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogoClassView.h; path = ../../../../../Desktop/TestDraw/LogoClassView.h; sourceTree = "<group>"; };
+		4063B51B20B1C38A00BC2F83 /* LogoClassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoClassView.m; path = ../../../../../Desktop/TestDraw/LogoClassView.m; sourceTree = "<group>"; };
 		EFA14F4C20AB566A00CF0E76 /* WaterPipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterPipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA14F4F20AB566A00CF0E76 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EFA14F5020AB566A00CF0E76 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -101,6 +104,8 @@
 		EFA14F7020AB727F00CF0E76 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4063B51A20B1C38A00BC2F83 /* LogoClassView.h */,
+				4063B51B20B1C38A00BC2F83 /* LogoClassView.m */,
 				EFA14F6520AB592E00CF0E76 /* Cell.h */,
 				EFA14F6620AB592E00CF0E76 /* Cell.m */,
 			);
@@ -176,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4063B51C20B1C38A00BC2F83 /* LogoClassView.m in Sources */,
 				EFA14F7320AB72FB00CF0E76 /* GameViewController.m in Sources */,
 				EFA14F6720AB592E00CF0E76 /* Cell.m in Sources */,
 				EFA14F6A20AB5AEC00CF0E76 /* StartController.m in Sources */,
