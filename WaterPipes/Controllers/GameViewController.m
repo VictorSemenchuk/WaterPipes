@@ -76,6 +76,12 @@
     [self configureCellsWithAreaSize:[self areaSize]];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    //StopTimer
+    [[self timer] invalidate];
+}
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 
@@ -170,14 +176,12 @@
     //If timer is not working yet then start timer
     if (![self isTamerStarted]) {
         [self setIsTamerStarted:YES];
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerTick:) userInfo:nil repeats:YES];
+        _timer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerTick:) userInfo:nil repeats:YES] retain];
     }
     
     BOOL result = [[self game] checkResult]; //fires methods for check answer chain true way
     if (result) {
         NSLog(@"Win");
-        //StopTimer
-        [[self timer] invalidate];
         
         MatrixIndex *startIndex = [[self game] controlItems][0];
         StartPipeCell *startPipeCell = [self cells][startIndex.i][startIndex.j];
