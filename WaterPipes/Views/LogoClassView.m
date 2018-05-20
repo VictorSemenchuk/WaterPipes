@@ -23,7 +23,11 @@
     //colors
     CGColorRef deepBlue = [UIColor colorWithRed:10/255.f green:66/255.f blue:145/255.f alpha:1].CGColor;
     CGColorRef lighBlue = [UIColor colorWithRed:15/255.f green:163/255.f blue:225/255.f alpha:1].CGColor;
+<<<<<<< HEAD
      CGColorRef lighGray = [UIColor colorWithRed:178/255.f green:183/255.f blue:187/255.f alpha:1].CGColor;
+=======
+    CGColorRef lighGray = [UIColor colorWithRed:178/255.f green:183/255.f blue:187/255.f alpha:1].CGColor;
+>>>>>>> StartView
 
     //First Pipe
     CGContextSetFillColorWithColor(context, lighGray);

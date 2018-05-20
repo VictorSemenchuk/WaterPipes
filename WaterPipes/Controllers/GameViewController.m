@@ -210,6 +210,13 @@
         [[self stepCountLabel] setText:[NSString stringWithFormat:@"Steps: %lu", [self stepCount]]];
     }
 }
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
