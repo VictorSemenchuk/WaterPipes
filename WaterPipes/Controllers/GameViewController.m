@@ -101,6 +101,19 @@
     [self setTicks:0];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 //MARK:- Configaration game area
 
 - (void)configureGameAreaForSize:(NSUInteger)size {
@@ -209,18 +222,6 @@
         [self setStepCount:[self stepCount] + 1];
         [[self stepCountLabel] setText:[NSString stringWithFormat:@"Steps: %lu", [self stepCount]]];
     }
-}
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
-}
-
-- (BOOL)shouldAutorotate {
-    return NO;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 //MARK:- Setup controls
