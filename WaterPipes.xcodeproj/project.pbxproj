@@ -7,17 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-<<<<<<< HEAD
-<<<<<<< HEAD
-		4063B51C20B1C38A00BC2F83 /* LogoClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4063B51B20B1C38A00BC2F83 /* LogoClassView.m */; };
-=======
 		EF111F8220ADED910095185A /* MatrixIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = EF111F8120ADED910095185A /* MatrixIndex.m */; };
->>>>>>> 2c4108a76b38981c23e81511d9200984c2ac8251
-=======
-		4072575A20ADF03B00E6A669 /* LinePipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4072575720ADF03B00E6A669 /* LinePipeCell.m */; };
-		4072575B20ADF03B00E6A669 /* CurvedPipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4072575920ADF03B00E6A669 /* CurvedPipeCell.m */; };
-		40E68DEE20B1ADA100EC407C /* LogoClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E68DED20B1ADA100EC407C /* LogoClassView.m */; };
->>>>>>> StartView
+		EF868E9E20B2169500E8C783 /* LogoClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF868E9C20B2169500E8C783 /* LogoClassView.m */; };
 		EFA14F5120AB566A00CF0E76 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA14F5020AB566A00CF0E76 /* AppDelegate.m */; };
 		EFA14F5920AB566D00CF0E76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA14F5820AB566D00CF0E76 /* Assets.xcassets */; };
 		EFA14F5F20AB566D00CF0E76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA14F5E20AB566D00CF0E76 /* main.m */; };
@@ -36,22 +27,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-<<<<<<< HEAD
-<<<<<<< HEAD
-		4063B51A20B1C38A00BC2F83 /* LogoClassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogoClassView.h; path = ../../../../../Desktop/TestDraw/LogoClassView.h; sourceTree = "<group>"; };
 		4063B51B20B1C38A00BC2F83 /* LogoClassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoClassView.m; path = ../../../../../Desktop/TestDraw/LogoClassView.m; sourceTree = "<group>"; };
-=======
 		EF111F8020ADED910095185A /* MatrixIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatrixIndex.h; sourceTree = "<group>"; };
 		EF111F8120ADED910095185A /* MatrixIndex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatrixIndex.m; sourceTree = "<group>"; };
->>>>>>> 2c4108a76b38981c23e81511d9200984c2ac8251
-=======
-		4072575620ADF03A00E6A669 /* CurvedPipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurvedPipeCell.h; path = ../../../../WaterPipes/WaterPipes/Views/CurvedPipeCell.h; sourceTree = "<group>"; };
-		4072575720ADF03B00E6A669 /* LinePipeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LinePipeCell.m; path = ../../../../WaterPipes/WaterPipes/Views/LinePipeCell.m; sourceTree = "<group>"; };
-		4072575820ADF03B00E6A669 /* LinePipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LinePipeCell.h; path = ../../../../WaterPipes/WaterPipes/Views/LinePipeCell.h; sourceTree = "<group>"; };
-		4072575920ADF03B00E6A669 /* CurvedPipeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurvedPipeCell.m; path = ../../../../WaterPipes/WaterPipes/Views/CurvedPipeCell.m; sourceTree = "<group>"; };
-		40E68DEC20B1ADA100EC407C /* LogoClassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogoClassView.h; path = ../../../../../Desktop/TestDraw/LogoClassView.h; sourceTree = "<group>"; };
-		40E68DED20B1ADA100EC407C /* LogoClassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoClassView.m; path = ../../../../../Desktop/TestDraw/LogoClassView.m; sourceTree = "<group>"; };
->>>>>>> StartView
+		EF868E9C20B2169500E8C783 /* LogoClassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoClassView.m; sourceTree = "<group>"; };
+		EF868E9D20B2169500E8C783 /* LogoClassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoClassView.h; sourceTree = "<group>"; };
 		EFA14F4C20AB566A00CF0E76 /* WaterPipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterPipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA14F4F20AB566A00CF0E76 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EFA14F5020AB566A00CF0E76 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -94,11 +74,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF868E9B20B2157200E8C783 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				4063B51B20B1C38A00BC2F83 /* LogoClassView.m */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		EFA14F4320AB566900CF0E76 = {
 			isa = PBXGroup;
 			children = (
 				EFA14F4E20AB566A00CF0E76 /* WaterPipes */,
 				EFA14F4D20AB566A00CF0E76 /* Products */,
+				EF868E9B20B2157200E8C783 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,17 +139,6 @@
 		EFA14F7020AB727F00CF0E76 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				4063B51A20B1C38A00BC2F83 /* LogoClassView.h */,
-				4063B51B20B1C38A00BC2F83 /* LogoClassView.m */,
-=======
-				40E68DEC20B1ADA100EC407C /* LogoClassView.h */,
-				40E68DED20B1ADA100EC407C /* LogoClassView.m */,
-				4072575620ADF03A00E6A669 /* CurvedPipeCell.h */,
-				4072575920ADF03B00E6A669 /* CurvedPipeCell.m */,
-				4072575820ADF03B00E6A669 /* LinePipeCell.h */,
-				4072575720ADF03B00E6A669 /* LinePipeCell.m */,
->>>>>>> StartView
 				EFA14F6520AB592E00CF0E76 /* Cell.h */,
 				EFA14F6620AB592E00CF0E76 /* Cell.m */,
 				EFD3419520AC28290056AD61 /* LinePipeCell.h */,
@@ -173,6 +151,8 @@
 				EFFC34F620AF352A00ABCADE /* EndPipeCell.m */,
 				EFFC34F220AF240C00ABCADE /* ValveView.h */,
 				EFFC34F320AF240C00ABCADE /* ValveView.m */,
+				EF868E9D20B2169500E8C783 /* LogoClassView.h */,
+				EF868E9C20B2169500E8C783 /* LogoClassView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -259,30 +239,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
-				4063B51C20B1C38A00BC2F83 /* LogoClassView.m in Sources */,
-=======
 				EFD3419E20AC5BFC0056AD61 /* Game.m in Sources */,
->>>>>>> 2c4108a76b38981c23e81511d9200984c2ac8251
 				EFA14F7320AB72FB00CF0E76 /* GameViewController.m in Sources */,
-<<<<<<< HEAD
 				EFD3419720AC28290056AD61 /* LinePipeCell.m in Sources */,
 				EFD3419A20AC32FE0056AD61 /* CurvedPipeCell.m in Sources */,
 				EFFC34F420AF240C00ABCADE /* ValveView.m in Sources */,
-=======
-				4072575A20ADF03B00E6A669 /* LinePipeCell.m in Sources */,
-				4072575B20ADF03B00E6A669 /* CurvedPipeCell.m in Sources */,
->>>>>>> StartView
 				EFA14F6720AB592E00CF0E76 /* Cell.m in Sources */,
 				EFA14F6A20AB5AEC00CF0E76 /* StartController.m in Sources */,
 				EFD341A120AC5D400056AD61 /* GameItem.m in Sources */,
 				EFA14F7620AB730400CF0E76 /* ResultsViewController.m in Sources */,
-<<<<<<< HEAD
 				EFFC34F720AF352A00ABCADE /* EndPipeCell.m in Sources */,
-=======
-				40E68DEE20B1ADA100EC407C /* LogoClassView.m in Sources */,
->>>>>>> StartView
 				EFA14F5F20AB566D00CF0E76 /* main.m in Sources */,
+				EF868E9E20B2169500E8C783 /* LogoClassView.m in Sources */,
 				EF111F8220ADED910095185A /* MatrixIndex.m in Sources */,
 				EFFC34F120AF1FB700ABCADE /* StartPipeCell.m in Sources */,
 				EFA14F5120AB566A00CF0E76 /* AppDelegate.m in Sources */,
@@ -418,13 +386,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5M3HNT6J9D;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WaterPipes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = vicmac.WaterPipes;
+				PRODUCT_BUNDLE_IDENTIFIER = vicmac.leshasmac.WaterPipes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -435,13 +403,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5M3HNT6J9D;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WaterPipes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = vicmac.WaterPipes;
+				PRODUCT_BUNDLE_IDENTIFIER = vicmac.leshasmac.WaterPipes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

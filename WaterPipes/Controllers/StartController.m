@@ -58,7 +58,6 @@
     
     [self.view addSubview: startButton];
     [self.view addSubview: aboutButton];
-<<<<<<< HEAD
     
     NSLayoutConstraint *aboutButtonPosition = [NSLayoutConstraint constraintWithItem:
                                                aboutButton
@@ -70,40 +69,6 @@
                                                                           multiplier: 1.0f
                                                                             constant: 35.0f
                                                ];
-    
-    NSLayoutConstraint *pinToLeftAboutButton = [NSLayoutConstraint constraintWithItem:
-                                                aboutButton
-                                                                            attribute: NSLayoutAttributeLeading
-                                                                            relatedBy: NSLayoutRelationEqual
-                                                
-                                                                               toItem: startButton
-                                                                            attribute: NSLayoutAttributeLeading
-                                                                           multiplier: 1.0f
-                                                                             constant: 15.5f
-                                                ];
-    [self.view addConstraints:@[aboutButtonPosition,pinToLeftAboutButton]];
-    
-    
-#pragma mark - Labels -
-    
-    
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 220, 40)];
-    titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    titleLabel.attributedText = [[NSAttributedString alloc] initWithString:@" WaterPipes" attributes:@{ NSStrokeColorAttributeName : naivyBlue, NSForegroundColorAttributeName : lightBlue, NSStrokeWidthAttributeName : @-3.5 }];
-    [titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:50]];
-=======
-    
-    NSLayoutConstraint *aboutButtonPosition = [NSLayoutConstraint constraintWithItem:
-                                               aboutButton
-                                                                           attribute: NSLayoutAttributeBottom
-                                                                           relatedBy: NSLayoutRelationEqual
-                                               
-                                                                              toItem: startButton
-                                                                           attribute: NSLayoutAttributeBottom
-                                                                          multiplier: 1.0f
-                                                                            constant: 35.0f
-                                               ];
->>>>>>> StartView
     
     NSLayoutConstraint *pinToLeftAboutButton = [NSLayoutConstraint constraintWithItem:
                                                 aboutButton
@@ -150,17 +115,12 @@
     [memberFour setFont:[UIFont fontWithName:@"Helvetica" size:13]];
     memberFour.textColor = [UIColor blackColor];
     
-<<<<<<< HEAD
-    
-=======
->>>>>>> StartView
     [self.view addSubview:titleLabel];
     [self.view addSubview:teamLabel];
     [self.view addSubview:memberOne];
     [self.view addSubview:memberTwo];
     [self.view addSubview:memberThree];
     [self.view addSubview:memberFour];
-    
     
     NSLayoutConstraint *titleLabelPosition = [NSLayoutConstraint constraintWithItem:
                                               titleLabel
@@ -287,10 +247,6 @@
                                 pinToLeftMemberOne,memberTwoPosition, pinToLeftMemberTwo,memberThreePosition, pinToRightMemberThree,
                                 memberFourPosition, pinToRightMemberFour]];
     
-<<<<<<< HEAD
-    
-=======
->>>>>>> StartView
 #pragma mark - Logo -
     UIView *logo = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 120)];
     logo.backgroundColor = background;
@@ -309,10 +265,6 @@
     [self.view addConstraints:@[leftLogo,rightLogo,topLogo]];
     [logo addConstraints:@[heightLogo, widthLogo]];
     
-<<<<<<< HEAD
-    
-=======
->>>>>>> StartView
 #pragma mark - Releasing -
     [startButton release];
     [aboutButton release];
@@ -326,15 +278,9 @@
     [logoView release];
     [lightGray release];
     [lightBlue release];
-<<<<<<< HEAD
-    [background release];
-    [myBlue release];
-    
-=======
     [naivyBlue release];
     [background release];
     [myBlue release];
->>>>>>> StartView
 }
 
 - (void)alertActionButton: (UIAlertController *)alert {
