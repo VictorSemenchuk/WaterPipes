@@ -26,6 +26,9 @@
 @property (retain, nonatomic) UILabel *stepCountLabel;
 @property (assign, nonatomic) NSUInteger stepCount;
 @property (retain, nonatomic) UIButton *showResultsButton;
+@property (assign, nonatomic) BOOL isTamerStarted;
+@property (retain, nonatomic) NSTimer *timer;
+@property (assign, nonatomic) NSUInteger ticks;
 
 - (void)configureGameAreaForSize:(NSUInteger)size;
 - (void)configureCellsWithAreaSize:(NSUInteger)cellsAmountPerRow;
@@ -49,6 +52,8 @@
     _gameAreaPadding = 0; //Padding of game area relative root view
     _gameAreaSideSize = [[self view] bounds].size.width - [self gameAreaPadding] * 2; //Full side size of game area
     _stepCount = 0;
+    _isTamerStarted = NO;
+    _ticks = 0;
     
     //Confiure matrix for cells
     [self configureGameAreaForSize:[self areaSize]];
@@ -86,6 +91,8 @@
     [[self showResultsButton] setHidden:YES];
     [self setStepCount:0];
     [[self stepCountLabel] setText:[NSString stringWithFormat:@"Steps: %lu", [self stepCount]]];
+    [self setIsTamerStarted:FALSE];
+    [self setTicks:0];
 }
 
 //MARK:- Configaration game area
@@ -159,22 +166,38 @@
 //MARK:- CellProtocol mathods that fires when user touches at cell (and cell rotates)
 
 - (void)cellWasRotated {
+    
+    //If timer is not working yet then start timer
+    if (![self isTamerStarted]) {
+        [self setIsTamerStarted:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerTick:) userInfo:nil repeats:YES];
+    }
+    
     BOOL result = [[self game] checkResult]; //fires methods for check answer chain true way
     if (result) {
         NSLog(@"Win");
+        //StopTimer
+        [[self timer] invalidate];
+        
         MatrixIndex *startIndex = [[self game] controlItems][0];
         StartPipeCell *startPipeCell = [self cells][startIndex.i][startIndex.j];
         UIColor *waterColor = [UIColor colorWithRed:85.0/255.0
                                                    green:189.0/255.0
                                                     blue:211.0/255.0
                                                    alpha:255.0/255.0];
+        
+        //Stop user interaction with game area
         [[self gameAreaView] setUserInteractionEnabled:NO];
+        
+        //Rotate water valve
         [startPipeCell rotateValveWithCompletion:^{
+            //Fill pipes by water
             for (int k = 0; k < [[[self game] controlItems] count]; k++) {
                 MatrixIndex *currentItemIndex = [[self game] controlItems][k];
                 Cell *currentItem = [self cells][currentItemIndex.i][currentItemIndex.j];
                 [currentItem setBackgroundColor:waterColor];
             }
+            //Showing results button
             [[self showResultsButton] setHidden:NO];
         }];
     } else {
@@ -238,6 +261,10 @@
     [resultVC release];
 }
 
+- (void)timerTick:(NSTimer *)timer {
+    [self setTicks:[self ticks] + 1];
+}
+
 //MARK:- Deallocating
 
 - (void)dealloc
@@ -247,6 +274,7 @@
     [_game release];
     [_stepCountLabel release];
     [_showResultsButton release];
+    [_timer release];
     [super dealloc];
 }
 
