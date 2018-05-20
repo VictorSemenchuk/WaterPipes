@@ -9,7 +9,8 @@
 #import "StartController.h"
 #import "GameViewController.h"
 #import "ResultsViewController.h"
-#import "LinePipeCell.h"
+#import <QuartzCore/QuartzCore.h>
+#import "LogoClassView.h"
 
 @interface StartController ()
 
@@ -19,112 +20,100 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[self view] setBackgroundColor:[UIColor whiteColor]];
     [self setTitle:@"Menu"];
     
-#pragma mark - Buttons -
-    UIButton *resultsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 130, 30)];
-    [resultsButton setTitle:@"R E S U L T S" forState:UIControlStateNormal];
-    resultsButton.tag = 1;
-    resultsButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [resultsButton setBackgroundColor:[UIColor cyanColor]];
-    [resultsButton addTarget:self action:@selector(clickResultButton:) forControlEvents:UIControlEventTouchUpInside];
+#pragma mark - Colors -
+    UIColor *myBlue = [[UIColor alloc] initWithRed:58/255.f green:131/255.f blue:255/255.f alpha:1];
+    UIColor *lightBlue = [[UIColor alloc] initWithRed:216/255.f green:224/255.f blue:246/255.f alpha:1];
+    UIColor *lightGray = [[UIColor alloc] initWithRed:178/255.f green:183/255.f blue:187/255.f alpha:1];
+    UIColor *background = [[UIColor alloc] initWithRed:233.0/255.0 green:237.0/255.0 blue:242.0/255.0 alpha:255.0/255.0];
+    UIColor *naivyBlue = [[UIColor alloc] initWithRed:169/255.f green:183/255.f blue:212/255.f alpha:1];
     
-    UIButton *startButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 130, 40)];
-    [startButton setCenter:CGPointMake([[self view] center].x, [[self view] center].y)];
+    [[self view] setBackgroundColor:background];
+    
+#pragma mark - Buttons -
+    CGRect frame = CGRectMake(0, 0, 130, 40);
+    
+    UIButton *startButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    startButton.layer.cornerRadius = 10;
+    startButton.clipsToBounds = YES;
+    startButton.frame = frame;
+    [startButton setCenter:CGPointMake([[self view] center].x, [[self view] center].y +30)];
     [startButton setTitle:@"S T A R T" forState:UIControlStateNormal];
+    [startButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     startButton.tag = 2;
-    [startButton setBackgroundColor:[UIColor cyanColor]];
+    [startButton setBackgroundColor:lightBlue];
     [startButton addTarget:self action:@selector(pushNextController:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *aboutButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 130, 40)];
-    [aboutButton setTitle:@"A B O U T" forState:UIControlStateNormal];
+    UIButton *aboutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    aboutButton.layer.cornerRadius = 10;
+    aboutButton.clipsToBounds = YES;
+    aboutButton.frame = frame;
+    [aboutButton setTitle:@"    A B O U T    " forState:UIControlStateNormal];
+    [aboutButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     aboutButton.tag = 3;
     aboutButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [aboutButton setBackgroundColor:[UIColor cyanColor]];
+    [aboutButton setBackgroundColor:lightBlue];
     [aboutButton addTarget:self action:@selector(alertActionButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview: resultsButton];
     [self.view addSubview: startButton];
     [self.view addSubview: aboutButton];
     
-    NSLayoutConstraint *resultsButtonPosition = [NSLayoutConstraint constraintWithItem:
-                                                 resultsButton
-                                                                             attribute: NSLayoutAttributeBottom
-                                                                             relatedBy: NSLayoutRelationEqual
-                                                 
-                                                                                toItem: startButton
-                                                                             attribute: NSLayoutAttributeBottom
-                                                                            multiplier: 1.0f
-                                                                              constant: 40.0f
-                                                 ];
     NSLayoutConstraint *aboutButtonPosition = [NSLayoutConstraint constraintWithItem:
                                                aboutButton
                                                                            attribute: NSLayoutAttributeBottom
                                                                            relatedBy: NSLayoutRelationEqual
                                                
-                                                                              toItem: resultsButton
+                                                                              toItem: startButton
                                                                            attribute: NSLayoutAttributeBottom
                                                                           multiplier: 1.0f
-                                                                            constant: 40.0f
+                                                                            constant: 35.0f
                                                ];
-    NSLayoutConstraint *pinToLeftResultsButton = [NSLayoutConstraint constraintWithItem:
-                                                  resultsButton
-                                                                              attribute: NSLayoutAttributeLeading
-                                                                              relatedBy: NSLayoutRelationEqual
-                                                  
-                                                                                 toItem: startButton
-                                                                              attribute: NSLayoutAttributeLeading
-                                                                             multiplier: 1.0f
-                                                                               constant: 12.0f
-                                                  ];
+    
     NSLayoutConstraint *pinToLeftAboutButton = [NSLayoutConstraint constraintWithItem:
                                                 aboutButton
                                                                             attribute: NSLayoutAttributeLeading
                                                                             relatedBy: NSLayoutRelationEqual
                                                 
-                                                                               toItem: resultsButton
+                                                                               toItem: startButton
                                                                             attribute: NSLayoutAttributeLeading
                                                                            multiplier: 1.0f
-                                                                             constant: 13.0f
+                                                                             constant: 15.5f
                                                 ];
-    [self.view addConstraints:@[resultsButtonPosition,pinToLeftResultsButton,aboutButtonPosition,pinToLeftAboutButton]];
-    
+    [self.view addConstraints:@[aboutButtonPosition,pinToLeftAboutButton]];
     
 #pragma mark - Labels -
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 220, 40)];
     titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    titleLabel.text = @" WaterPipes";
+    titleLabel.attributedText = [[[NSAttributedString alloc] initWithString:@" WaterPipes" attributes:@{ NSStrokeColorAttributeName : naivyBlue, NSForegroundColorAttributeName : lightBlue, NSStrokeWidthAttributeName : @-3.5 }] autorelease];
     [titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:50]];
-    titleLabel.textColor = [UIColor blueColor];
-    
+   
     UILabel *teamLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 40)];
     teamLabel.translatesAutoresizingMaskIntoConstraints = NO;
     teamLabel.text = @"   WaterPipes Team";
     [teamLabel setFont:[UIFont fontWithName:@"Helvetica" size:16]];
-    teamLabel.textColor = [UIColor lightGrayColor];
+    teamLabel.textColor = [UIColor blackColor];
     
     UILabel *memberOne = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 290, 40)];
     memberOne.translatesAutoresizingMaskIntoConstraints = NO;
     memberOne.text = @"   Aliaksei Yelin";
     [memberOne setFont:[UIFont fontWithName:@"Helvetica" size:13]];
-    memberOne.textColor = [UIColor lightGrayColor];
+    memberOne.textColor = [UIColor blackColor];
     UILabel *memberTwo = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 290, 40)];
     memberTwo.translatesAutoresizingMaskIntoConstraints = NO;
     memberTwo.text = @"Victor Semenchuk";
     [memberTwo setFont:[UIFont fontWithName:@"Helvetica" size:13]];
-    memberTwo.textColor = [UIColor lightGrayColor];
+    memberTwo.textColor = [UIColor blackColor];
     UILabel *memberThree = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 290, 40)];
     memberThree.translatesAutoresizingMaskIntoConstraints = NO;
     memberThree.text = @"Mark Velichko      ";
     [memberThree setFont:[UIFont fontWithName:@"Helvetica" size:13]];
-    memberThree.textColor = [UIColor lightGrayColor];
+    memberThree.textColor = [UIColor blackColor];
     UILabel *memberFour = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 290, 40)];
     memberFour.translatesAutoresizingMaskIntoConstraints = NO;
     memberFour.text = @"Elizaveta Shulskaya ";
     [memberFour setFont:[UIFont fontWithName:@"Helvetica" size:13]];
-    memberFour.textColor = [UIColor lightGrayColor];
-    
+    memberFour.textColor = [UIColor blackColor];
     
     [self.view addSubview:titleLabel];
     [self.view addSubview:teamLabel];
@@ -142,7 +131,7 @@
                                                                              toItem: startButton
                                                                           attribute: NSLayoutAttributeBottom
                                                                          multiplier: 1.0f
-                                                                           constant: -60.0f
+                                                                           constant: -50.0f
                                               ];
     NSLayoutConstraint *pinToLeftTitleLabel = [NSLayoutConstraint constraintWithItem:
                                                titleLabel
@@ -162,7 +151,7 @@
                                                                             toItem: aboutButton
                                                                          attribute: NSLayoutAttributeBottom
                                                                         multiplier: 1.0f
-                                                                          constant: 105.0f
+                                                                          constant: 135.0f
                                              ];
     NSLayoutConstraint *pinToLeftTeamLabel = [NSLayoutConstraint constraintWithItem:
                                               teamLabel
@@ -182,7 +171,7 @@
                                                                             toItem: aboutButton
                                                                          attribute: NSLayoutAttributeBottom
                                                                         multiplier: 1.0f
-                                                                          constant: 120.0f
+                                                                          constant: 150.0f
                                              ];
     NSLayoutConstraint *pinToLeftMemberOne = [NSLayoutConstraint constraintWithItem:
                                               memberOne
@@ -202,7 +191,7 @@
                                                                             toItem: aboutButton
                                                                          attribute: NSLayoutAttributeBottom
                                                                         multiplier: 1.0f
-                                                                          constant: 135.0f
+                                                                          constant: 165.0f
                                              ];
     NSLayoutConstraint *pinToLeftMemberTwo = [NSLayoutConstraint constraintWithItem:
                                               memberTwo
@@ -222,7 +211,7 @@
                                                                               toItem: aboutButton
                                                                            attribute: NSLayoutAttributeBottom
                                                                           multiplier: 1.0f
-                                                                            constant: 120.0f
+                                                                            constant: 150.0f
                                                ];
     NSLayoutConstraint *pinToRightMemberThree = [NSLayoutConstraint constraintWithItem:
                                                  memberThree
@@ -242,7 +231,7 @@
                                                                              toItem: aboutButton
                                                                           attribute: NSLayoutAttributeBottom
                                                                          multiplier: 1.0f
-                                                                           constant: 135.0f
+                                                                           constant: 165.0f
                                               ];
     NSLayoutConstraint *pinToRightMemberFour = [NSLayoutConstraint constraintWithItem:
                                                 memberFour
@@ -259,13 +248,13 @@
                                 pinToLeftMemberOne,memberTwoPosition, pinToLeftMemberTwo,memberThreePosition, pinToRightMemberThree,
                                 memberFourPosition, pinToRightMemberFour]];
     
-    
 #pragma mark - Logo -
-    UIView *logo = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    logo.backgroundColor = [UIColor cyanColor];
+    UIView *logo = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 120)];
+    logo.backgroundColor = background;
     [logo setTranslatesAutoresizingMaskIntoConstraints:NO];
-    LinePipeCell *linePipeLogo = [[LinePipeCell alloc] initWithFrame:(CGRectMake(0, 0, [logo frame].size.width, [logo frame].size.height))];
-    [logo addSubview:linePipeLogo];
+    LogoClassView *logoView = [[LogoClassView alloc] initWithFrame:(CGRectMake(-25, -15, [logo frame].size.width, [logo frame].size.height))];
+    logoView.backgroundColor = background;
+    [logo addSubview:logoView];
     [self.view addSubview:logo];
     
     NSLayoutConstraint *leftLogo = [NSLayoutConstraint constraintWithItem:logo attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:90];
@@ -277,9 +266,7 @@
     [self.view addConstraints:@[leftLogo,rightLogo,topLogo]];
     [logo addConstraints:@[heightLogo, widthLogo]];
     
-    
 #pragma mark - Releasing -
-    [resultsButton release];
     [startButton release];
     [aboutButton release];
     [titleLabel release];
@@ -289,8 +276,12 @@
     [memberThree release];
     [memberFour release];
     [logo release];
-    [linePipeLogo release];
-    
+    [logoView release];
+    [lightGray release];
+    [lightBlue release];
+    [naivyBlue release];
+    [background release];
+    [myBlue release];
 }
 
 - (void)alertActionButton: (UIAlertController *)alert {
@@ -301,7 +292,6 @@
     [alertButton addAction:ok];
     [self presentViewController:alertButton animated:YES completion:nil];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4072575A20ADF03B00E6A669 /* LinePipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4072575720ADF03B00E6A669 /* LinePipeCell.m */; };
 		4072575B20ADF03B00E6A669 /* CurvedPipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4072575920ADF03B00E6A669 /* CurvedPipeCell.m */; };
+		40E68DEE20B1ADA100EC407C /* LogoClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E68DED20B1ADA100EC407C /* LogoClassView.m */; };
 		EFA14F5120AB566A00CF0E76 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA14F5020AB566A00CF0E76 /* AppDelegate.m */; };
 		EFA14F5920AB566D00CF0E76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA14F5820AB566D00CF0E76 /* Assets.xcassets */; };
 		EFA14F5F20AB566D00CF0E76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA14F5E20AB566D00CF0E76 /* main.m */; };
@@ -24,6 +25,8 @@
 		4072575720ADF03B00E6A669 /* LinePipeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LinePipeCell.m; path = ../../../../WaterPipes/WaterPipes/Views/LinePipeCell.m; sourceTree = "<group>"; };
 		4072575820ADF03B00E6A669 /* LinePipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LinePipeCell.h; path = ../../../../WaterPipes/WaterPipes/Views/LinePipeCell.h; sourceTree = "<group>"; };
 		4072575920ADF03B00E6A669 /* CurvedPipeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurvedPipeCell.m; path = ../../../../WaterPipes/WaterPipes/Views/CurvedPipeCell.m; sourceTree = "<group>"; };
+		40E68DEC20B1ADA100EC407C /* LogoClassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogoClassView.h; path = ../../../../../Desktop/TestDraw/LogoClassView.h; sourceTree = "<group>"; };
+		40E68DED20B1ADA100EC407C /* LogoClassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoClassView.m; path = ../../../../../Desktop/TestDraw/LogoClassView.m; sourceTree = "<group>"; };
 		EFA14F4C20AB566A00CF0E76 /* WaterPipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterPipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA14F4F20AB566A00CF0E76 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EFA14F5020AB566A00CF0E76 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -107,6 +110,8 @@
 		EFA14F7020AB727F00CF0E76 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				40E68DEC20B1ADA100EC407C /* LogoClassView.h */,
+				40E68DED20B1ADA100EC407C /* LogoClassView.m */,
 				4072575620ADF03A00E6A669 /* CurvedPipeCell.h */,
 				4072575920ADF03B00E6A669 /* CurvedPipeCell.m */,
 				4072575820ADF03B00E6A669 /* LinePipeCell.h */,
@@ -192,6 +197,7 @@
 				EFA14F6720AB592E00CF0E76 /* Cell.m in Sources */,
 				EFA14F6A20AB5AEC00CF0E76 /* StartController.m in Sources */,
 				EFA14F7620AB730400CF0E76 /* ResultsViewController.m in Sources */,
+				40E68DEE20B1ADA100EC407C /* LogoClassView.m in Sources */,
 				EFA14F5F20AB566D00CF0E76 /* main.m in Sources */,
 				EFA14F5120AB566A00CF0E76 /* AppDelegate.m in Sources */,
 			);
