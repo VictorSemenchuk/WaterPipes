@@ -257,6 +257,9 @@
 
 - (void)showResults {
     ResultsViewController *resultVC = [[ResultsViewController alloc] init];
+    [resultVC setStepsCount:[self stepCount]];
+    [resultVC setGameTime:[self ticks]];
+    
     [[self navigationController] pushViewController:resultVC animated:YES];
     [resultVC release];
 }

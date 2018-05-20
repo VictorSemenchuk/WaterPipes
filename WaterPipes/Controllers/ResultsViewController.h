@@ -10,4 +10,7 @@
 
 @interface ResultsViewController : UIViewController
 
+@property (assign, nonatomic) NSUInteger stepsCount;
+@property (assign, nonatomic) NSUInteger gameTime;
+
 @end
