@@ -58,7 +58,7 @@
     UIFont *regularFont = [UIFont fontWithName:@"Helvetica" size:labelHeight];
     
     //Steps section
-    CGFloat yValue = 90;
+    CGFloat yValue = 110;
     
     CGRect stepsCountTitleLabelFrame = CGRectMake(sidePadding, yValue, 70, labelHeight);
     UILabel *stepsCountTitleLabel = [[UILabel alloc] initWithFrame:stepsCountTitleLabelFrame];
@@ -79,7 +79,7 @@
     [stepsCountLabel release];
     
     //Time section
-    yValue = 130;
+    yValue = 150;
     
     CGRect timeTitleLabelFrame = CGRectMake(sidePadding, yValue, 70, labelHeight);
     UILabel *timeTitleLabel = [[UILabel alloc] initWithFrame:timeTitleLabelFrame];

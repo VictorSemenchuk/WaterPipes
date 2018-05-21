@@ -1,4 +1,4 @@
-# WaterPipes
+# Team №3 Task: WaterPipes
 
 
 A simple game about the hard life of plumbers
