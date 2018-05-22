@@ -17,7 +17,7 @@
 
 @interface GameViewController () <CellProtocol>
 
-@property (retain, nonatomic) UIView *gameAreaView;
+@property (assign, nonatomic) UIView *gameAreaView;
 @property (copy, nonatomic) NSArray *cells;
 @property (retain, nonatomic) Game *game;
 @property (assign, nonatomic) NSUInteger areaSize;
@@ -48,12 +48,12 @@
     [[self view] setBackgroundColor:rootViewBGColor];
     [self setTitle:@"Game"];
     
-    _areaSize = 5; //Cells amount in the row and column. So we will have game matrix 5x5
-    _gameAreaPadding = 0; //Padding of game area relative root view
-    _gameAreaSideSize = [[self view] bounds].size.width - [self gameAreaPadding] * 2; //Full side size of game area
-    _stepCount = 0;
-    _isTamerStarted = NO;
-    _ticks = 0;
+    self.areaSize = 5; //Cells amount in the row and column. So we will have game matrix 5x5
+    self.gameAreaPadding = 0; //Padding of game area relative root view
+    self.gameAreaSideSize = [[self view] bounds].size.width - [self gameAreaPadding] * 2; //Full side size of game area
+    self.stepCount = 0;
+    self.isTamerStarted = NO;
+    self.ticks = 0;
     
     //Confiure matrix for cells
     [self configureGameAreaForSize:[self areaSize]];
@@ -69,7 +69,7 @@
     int gameNumber = [Game getRandomNumberBetween:0 to:2];
     
     //Init game
-    _game = [[Game alloc] initForGame:gameNumber
+    self.game = [[Game alloc] initForGame:gameNumber
                          withAreaSize:[self areaSize]];
     
     //Confiure cells
@@ -124,12 +124,13 @@
                                       [self gameAreaSideSize]); //Frame for game area matria
     UIColor *gameAreaViewBGColor = [UIColor clearColor];
     
-    _gameAreaView = [[UIView alloc] initWithFrame:gameAreaFrame]; //Init view area where we will place cells
-    [[self gameAreaView] setBackgroundColor:gameAreaViewBGColor];
-    [[[self gameAreaView] layer] setCornerRadius:0.0];
-    [[self gameAreaView] setClipsToBounds:YES];
+    UIView *view = [[UIView alloc] initWithFrame:gameAreaFrame]; //Init view area where we will place cells
+    [view setBackgroundColor:gameAreaViewBGColor];
+    [[view layer] setCornerRadius:0.0];
+    [view setClipsToBounds:YES];
     
-    [[self view] addSubview:[self gameAreaView]];
+    [[self view] addSubview:view];
+    self.gameAreaView = view;
 }
 
 - (void)configureCellsWithAreaSize:(NSUInteger)cellsAmountPerRow {
@@ -178,7 +179,7 @@
         [currentRowCells release];
     }
     
-    _cells = [[NSArray alloc] initWithArray:cells];
+    self.cells = [cells copy];
     [cells release];
 }
 
@@ -189,7 +190,7 @@
     //If timer is not working yet then start timer
     if (![self isTamerStarted]) {
         [self setIsTamerStarted:YES];
-        _timer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerTick:) userInfo:nil repeats:YES] retain];
+        self.timer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerTick:) userInfo:nil repeats:YES] retain];
     }
     
     BOOL result = [[self game] checkResult]; //fires methods for check answer chain true way
@@ -259,8 +260,8 @@
     [resultsButton setBackgroundColor:color];
     [self setShowResultsButton:resultsButton];
     [[self view] addSubview:[self showResultsButton]];
-    [[self showResultsButton] setHidden:YES];
-    [[self showResultsButton] addTarget:self action:@selector(showResults) forControlEvents:UIControlEventTouchUpInside];
+    [self.showResultsButton setHidden:YES];
+    [self.showResultsButton addTarget:self action:@selector(showResults) forControlEvents:UIControlEventTouchUpInside];
     [resultsButton release];
     
 }
@@ -284,7 +285,7 @@
 
 - (void)dealloc
 {
-    [_gameAreaView release];
+    _gameAreaView = nil;
     [_cells release];
     [_game release];
     [_stepCountLabel release];

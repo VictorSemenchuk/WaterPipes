@@ -73,7 +73,7 @@
         [currentRowItems release];
     }
     
-    _items = [[NSArray alloc] initWithArray:items];
+    self.items = [items copy];
     
     [angles release];
     [items release];
@@ -88,7 +88,7 @@
     if (number == 0) {
         
         int i = 0, j = 0, k = 0;
-        _controlItems = [[NSMutableArray alloc] initWithCapacity:15];
+        self.controlItems = [[NSMutableArray alloc] initWithCapacity:15];
         
         [self addControlItemWithI:i andJ:j atK:k++];
         
@@ -151,7 +151,7 @@
     } else if (number == 1) {
         
         int i = 0, j = 0, k = 0;
-        _controlItems = [[NSMutableArray alloc] initWithCapacity:15];
+        self.controlItems = [[NSMutableArray alloc] initWithCapacity:15];
         
         [self addControlItemWithI:i andJ:j atK:k++];
         
@@ -214,7 +214,7 @@
     } else if (number == 2) {
         
         int i = 0, j = 0, k = 0;
-        _controlItems = [[NSMutableArray alloc] initWithCapacity:15];
+        self.controlItems = [[NSMutableArray alloc] initWithCapacity:15];
         
         [self addControlItemWithI:i andJ:j atK:k++];
         
